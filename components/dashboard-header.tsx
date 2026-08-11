@@ -20,7 +20,7 @@ export function DashboardHeader() {
             <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-balance">
               Playful Academics
               <br />
-              <span className="text-white/90">Parent Hub</span>
+              <span className="text-white/90">Co Op Hub</span>
             </h1>
           </div>
           <p className="text-white/80 text-lg font-semibold">

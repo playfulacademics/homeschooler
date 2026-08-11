@@ -7,7 +7,7 @@ const _nunito = Nunito({ subsets: ['latin'], weight: ['400', '600', '700', '800'
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Playful Academics Parent Hub',
+  title: 'Playful Academics Co Op Hub',
   description: 'A central, friendly hub for Playful Academics co-op members to view lessons, check calendar events, and manage tuition.',
   generator: 'v0.app',
   icons: {
