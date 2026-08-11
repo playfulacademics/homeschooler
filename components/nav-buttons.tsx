@@ -1,6 +1,6 @@
 "use client"
 
-export type ActiveView = "calendar" | "unit" | "tuition"
+export type ActiveView = "calendar" | "kendall" | "westchester" | "tuition"
 
 interface NavButtonsProps {
   active: ActiveView
@@ -17,12 +17,20 @@ const BUTTONS: { id: ActiveView; label: string; icon: string; color: string; act
     ring: "ring-accent/40",
   },
   {
-    id: "unit",
-    label: "Current Unit Study",
+    id: "kendall",
+    label: "Kendall Co-Op",
     icon: "🧪",
     color: "bg-primary/10 text-primary border-primary/30 hover:bg-primary/20",
     activeColor: "bg-primary text-white border-primary shadow-lg shadow-primary/30",
     ring: "ring-primary/40",
+  },
+  {
+    id: "westchester",
+    label: "Westchester Co-Op",
+    icon: "🚀",
+    color: "bg-indigo-500/10 text-indigo-500 border-indigo-500/30 hover:bg-indigo-500/20",
+    activeColor: "bg-indigo-500 text-white border-indigo-500 shadow-lg shadow-indigo-500/30",
+    ring: "ring-indigo-500/40",
   },
   {
     id: "tuition",
@@ -37,7 +45,7 @@ const BUTTONS: { id: ActiveView; label: string; icon: string; color: string; act
 export function NavButtons({ active, onSelect }: NavButtonsProps) {
   return (
     <nav aria-label="Dashboard navigation">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
         {BUTTONS.map((btn) => {
           const isActive = active === btn.id
           return (

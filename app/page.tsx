@@ -10,24 +10,27 @@ import { DashboardFooter } from "@/components/dashboard-footer"
 
 const VIEW_LABELS: Record<ActiveView, string> = {
   calendar: "Monthly Calendar",
-  unit: "Current Unit Study",
+  kendall: "Kendall Co-Op Unit Study",
+  westchester: "Westchester Co-Op Unit Study",
   tuition: "Pay Tuition",
 }
 
 const VIEW_BORDER: Record<ActiveView, string> = {
   calendar: "border-accent/30",
-  unit: "border-primary/30",
+  kendall: "border-primary/30",
+  westchester: "border-indigo-500/30",
   tuition: "border-secondary/30",
 }
 
 const VIEW_HEADER_BG: Record<ActiveView, string> = {
   calendar: "from-accent/10 to-transparent",
-  unit: "from-primary/10 to-transparent",
+  kendall: "from-primary/10 to-transparent",
+  westchester: "from-indigo-500/10 to-transparent",
   tuition: "from-secondary/10 to-transparent",
 }
 
 export default function Home() {
-  const [activeView, setActiveView] = useState<ActiveView>("unit")
+  const [activeView, setActiveView] = useState<ActiveView>("kendall")
 
   return (
     <main className="min-h-screen bg-background">
@@ -58,7 +61,8 @@ export default function Home() {
               className="animate-in fade-in slide-in-from-bottom-3 duration-300"
             >
               {activeView === "calendar" && <CalendarView />}
-              {activeView === "unit" && <UnitStudyView />}
+              {activeView === "kendall" && <UnitStudyView location="kendall" />}
+              {activeView === "westchester" && <UnitStudyView location="westchester" />}
               {activeView === "tuition" && <TuitionView />}
             </div>
           </div>

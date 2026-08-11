@@ -1,6 +1,16 @@
 "use client"
 
-const WEEKS = [
+interface WeekData {
+  week: number
+  topic: string
+  activity: string
+  description: string
+  icon: string
+  color: string
+  funFact: string
+}
+
+const KENDALL_WEEKS: WeekData[] = [
   {
     week: 1,
     topic: "The Skeletal System",
@@ -43,6 +53,49 @@ const WEEKS = [
   },
 ]
 
+const WESTCHESTER_WEEKS: WeekData[] = [
+  {
+    week: 1,
+    topic: "Branding & Brainstorming",
+    activity: "Create a Logo & Tagline",
+    description:
+      "Learn how real businesses catch our eye! Students brainstorm their own unique product ideas, design hand-drawn logos, and write catchy taglines.",
+    icon: "🎨",
+    color: "primary",
+    funFact: "Fun Fact: The famous Nike 'Swoosh' logo was designed by a student for only $35 in 1971!",
+  },
+  {
+    week: 2,
+    topic: "Costs & Margins",
+    activity: "Setting up a Profit Table",
+    description:
+      "Real-world math in action! Using Singapore Math concepts, students calculate the cost of raw materials (supplies) versus selling prices to find their profit margins.",
+    icon: "📊",
+    color: "accent",
+    funFact: "Fun Fact: Profit is the money left over after paying for supplies. Business math makes finance exciting!",
+  },
+  {
+    week: 3,
+    topic: "Marketing & Commercial Pitches",
+    activity: "Record a 30-Second Elevator Pitch",
+    description:
+      "Stand tall and share your passion! Students practice public speaking by drafting and recording a 30-second commercial to pitch their brand to families.",
+    icon: "🎙️",
+    color: "secondary",
+    funFact: "Fun Fact: Good marketing is simply telling a compelling, honest story about how your product helps someone else!",
+  },
+  {
+    week: 4,
+    topic: "The Live Co-Op Marketplace",
+    activity: "Selling Hand-Crafted Products",
+    description:
+      "Real-world trading day! Students set up mini-storefront booths to showcase and trade their actual creations using co-op play tokens with families.",
+    icon: "🎪",
+    color: "success",
+    funFact: "Fun Fact: Many of today's most successful entrepreneurs started their very first businesses before they turned 10!",
+  },
+]
+
 const COLOR_MAP: Record<string, { bg: string; border: string; text: string; badge: string; badgeText: string }> = {
   primary: {
     bg: "bg-primary/8",
@@ -72,21 +125,47 @@ const COLOR_MAP: Record<string, { bg: string; border: string; text: string; badg
     badge: "bg-success",
     badgeText: "text-white",
   },
+  indigo: {
+    bg: "bg-indigo-500/8",
+    border: "border-indigo-500/30",
+    text: "text-indigo-500",
+    badge: "bg-indigo-500",
+    badgeText: "text-white",
+  },
 }
 
-export function UnitStudyView() {
+interface UnitStudyViewProps {
+  location?: "kendall" | "westchester"
+}
+
+export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
+  const isKendall = location === "kendall"
+  const weeks = isKendall ? KENDALL_WEEKS : WESTCHESTER_WEEKS
+
+  const headerGradient = isKendall
+    ? "from-primary/10 via-accent/10 to-secondary/10"
+    : "from-indigo-500/10 via-accent/10 to-success/10"
+
+  const titleColor = isKendall ? "text-primary" : "text-indigo-500"
+
   return (
     <div className="space-y-6">
       {/* Unit header */}
-      <div className="rounded-2xl bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-4">
-        <div className="text-5xl" role="img" aria-label="body">🫀</div>
+      <div className={`rounded-2xl bg-gradient-to-r ${headerGradient} border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-4`}>
+        <div className="text-5xl" role="img" aria-label="unit-icon">
+          {isKendall ? "🫀" : "💼"}
+        </div>
         <div>
           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">
-            Current Unit Study
+            {isKendall ? "Kendall Campus Study" : "Westchester Campus Study"}
           </div>
-          <h2 className="text-2xl font-black text-foreground">My Body</h2>
+          <h2 className={`text-2xl font-black ${titleColor}`}>
+            {isKendall ? "My Body" : "Little Entrepreneurs"}
+          </h2>
           <p className="text-sm text-muted-foreground font-semibold mt-1">
-            4-week deep dive exploring the amazing human body through hands-on activities, movement, and creativity!
+            {isKendall
+              ? "4-week deep dive exploring the amazing human body through hands-on anatomy, movement, and tracking!"
+              : "4-week business and branding crash-course turning kids into real founders with product ideas and a live marketplace!"}
           </p>
         </div>
         <div className="sm:ml-auto flex flex-col items-start sm:items-end gap-1">
@@ -95,7 +174,13 @@ export function UnitStudyView() {
             {[1, 2, 3, 4].map((w) => (
               <div
                 key={w}
-                className={`w-8 h-3 rounded-full ${w === 1 ? "bg-primary" : w === 2 ? "bg-accent" : "bg-border"}`}
+                className={`w-8 h-3 rounded-full ${
+                  w === 1
+                    ? isKendall ? "bg-primary" : "bg-indigo-500"
+                    : w === 2
+                    ? "bg-accent"
+                    : "bg-border"
+                }`}
                 title={`Week ${w}`}
               />
             ))}
@@ -106,8 +191,14 @@ export function UnitStudyView() {
 
       {/* Week cards */}
       <div className="grid sm:grid-cols-2 gap-4">
-        {WEEKS.map((week) => {
-          const c = COLOR_MAP[week.color]
+        {weeks.map((week) => {
+          // Adjust color mapping dynamically for Westchester to give it an elegant custom theme
+          let colorKey = week.color
+          if (!isKendall && week.color === "primary") {
+            colorKey = "indigo"
+          }
+          const c = COLOR_MAP[colorKey] || COLOR_MAP.primary
+
           return (
             <div
               key={week.week}
@@ -149,13 +240,17 @@ export function UnitStudyView() {
         })}
       </div>
 
-      {/* Supplies reminder */}
+      {/* Supplies / Action reminder */}
       <div className="rounded-2xl bg-muted border border-border p-4 flex gap-3 items-start">
-        <span className="text-2xl">🎒</span>
+        <span className="text-2xl">{isKendall ? "🎒" : "💰"}</span>
         <div>
-          <h4 className="font-black text-sm text-foreground">Supply Reminder</h4>
+          <h4 className="font-black text-sm text-foreground">
+            {isKendall ? "Supply Reminder" : "Action Required"}
+          </h4>
           <p className="text-xs text-muted-foreground font-semibold mt-1 leading-relaxed">
-            For this week&apos;s Five Senses activities, please pack a small mystery snack and a blindfold (a bandana works great!). See the full supply list on the co-op portal.
+            {isKendall
+              ? "For this week's Five Senses activities, please pack a small mystery snack and a blindfold (a bandana works great!). See the full supply list on the co-op portal."
+              : "For this week's Costs & Margins exercises, please help your child list 3 simple household supplies they plan to use for their product and discuss how much those cost."}
           </p>
         </div>
       </div>
