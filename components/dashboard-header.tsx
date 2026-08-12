@@ -36,12 +36,12 @@ export function DashboardHeader() {
             </div>
           </div>
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 text-center min-w-[90px]">
-            <div className="text-sm font-black leading-tight">Unit</div>
-            <div className="text-xs font-bold text-white/75">My Body</div>
+            <div className="text-sm font-black leading-tight">Month</div>
+            <div className="text-xs font-bold text-white/75">September</div>
           </div>
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 text-center min-w-[90px]">
             <div className="text-sm font-black leading-tight">Due</div>
-            <div className="text-xs font-bold text-white/75">Aug 1st</div>
+            <div className="text-xs font-bold text-white/75">Sept 15th</div>
           </div>
         </div>
       </div>
