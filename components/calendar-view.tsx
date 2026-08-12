@@ -42,7 +42,7 @@ const EVENTS: CalendarEvent[] = [
   { day: 11, type: "fieldtrip", label: "Salvatore Park Picnic (11am)" },
   { day: 15, type: "tuition", label: "October Tuition Due" },
   { day: 16, type: "fieldtrip", label: "DIY Squishy Party (11:30am)" },
-  { day: 25, type: "fieldtrip", label: "Top Golf Field Trip (11am)" },
+  { day: 25, type: "fieldtrip", label: "Top Golf Field Trip (12:15pm)" },
 ]
 
 const FIELD_TRIPS: Record<number, FieldTripDetails> = {
@@ -69,7 +69,7 @@ const FIELD_TRIPS: Record<number, FieldTripDetails> = {
   25: {
     title: "Field Trip Friday: Top Golf Doral",
     date: "Friday, September 25, 2026",
-    time: "11:00 AM",
+    time: "12:15 PM",
     cost: "$10 per person",
     location: "Topgolf Doral (10611 NW 19th St, Doral, FL 33172)",
     description: "Tee off with your co-op friends! We have reserved bays for private group play where kids can learn basic golf swing coordination, play fun target games, and enjoy child-friendly lunch options. Great for all skill levels!",
@@ -346,7 +346,7 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
             <br />
             <strong>Sept 16 (11:30am):</strong> DIY Squishy Party ($10/child) at Larry & Penny Park.
             <br />
-            <strong>Sept 25 (11am):</strong> Field Trip to Top Golf in Doral ($10/person).
+            <strong>Sept 25 (12:15pm):</strong> Field Trip to Top Golf in Doral ($10/person).
             <br />
             <span className="text-[10px] text-accent/80 font-bold block mt-1">💡 Click any Field Trip badge on the calendar to see full details!</span>
           </p>
