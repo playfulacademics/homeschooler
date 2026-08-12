@@ -236,7 +236,7 @@ export function TuitionView() {
           <div className="rounded-2xl border-2 border-accent/30 bg-accent/8 p-4">
             <p className="text-xs font-bold text-accent flex gap-2">
               <span>⏰</span>
-              <span>Tuition is due on the <strong>15th of each month</strong>. Questions? Email us at families@playfulacademics.com</span>
+              <span>Tuition is due on the <strong>15th of each month</strong>. Questions? <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="underline font-black hover:opacity-80">Contact Fame via WhatsApp</a></span>
             </p>
           </div>
         </div>

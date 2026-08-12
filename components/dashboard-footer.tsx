@@ -21,10 +21,12 @@ export function DashboardFooter() {
           </a>
           <span className="hidden sm:inline text-border">|</span>
           <a
-            href="mailto:families@playfulacademics.com"
+            href="https://wa.me/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-accent hover:text-accent/80 transition-colors underline underline-offset-2"
           >
-            Contact Us
+            Contact Fame via WhatsApp
           </a>
         </div>
       </div>
