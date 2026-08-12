@@ -134,7 +134,7 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
         const isKendall = ev.label.toLowerCase().includes("kendall")
         onNavigate(isKendall ? "kendall" : "westchester")
       } else if (ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")) {
-        window.open("https://playfulacademics.com", "_blank")
+        window.open("https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD", "_blank")
       }
     }
   }
@@ -304,7 +304,7 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
             <div className="flex gap-3">
               {selectedTrip.cost !== "FREE" && (
                 <a
-                  href="https://playfulacademics.com"
+                  href="https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-grow py-3 rounded-2xl bg-secondary text-white font-black text-xs hover:opacity-95 transition-all text-center flex items-center justify-center shadow-md active:scale-98"
