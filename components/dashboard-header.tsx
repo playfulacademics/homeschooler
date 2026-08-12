@@ -43,6 +43,14 @@ export function DashboardHeader() {
             <div className="text-sm font-black leading-tight">Due</div>
             <div className="text-xs font-bold text-white/75">Sept 15th</div>
           </div>
+          <div className="bg-red-500/35 border border-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 text-center max-w-[160px] flex flex-col justify-center items-center gap-0.5 shadow-inner">
+            <div className="text-[10px] font-black uppercase tracking-wider text-red-100 flex items-center gap-1">
+              <span>⚠️</span> Reminder
+            </div>
+            <div className="text-[10px] font-black leading-tight text-white">
+              Complete all forms before attending co op
+            </div>
+          </div>
         </div>
       </div>
     </header>
