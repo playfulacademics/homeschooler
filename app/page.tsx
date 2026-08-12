@@ -60,7 +60,7 @@ export default function Home() {
               key={activeView}
               className="animate-in fade-in slide-in-from-bottom-3 duration-300"
             >
-              {activeView === "calendar" && <CalendarView />}
+              {activeView === "calendar" && <CalendarView onNavigate={setActiveView} />}
               {activeView === "kendall" && <UnitStudyView location="kendall" />}
               {activeView === "westchester" && <UnitStudyView location="westchester" />}
               {activeView === "tuition" && <TuitionView />}

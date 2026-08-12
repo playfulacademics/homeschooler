@@ -33,9 +33,9 @@ const EVENTS: CalendarEvent[] = [
 ]
 
 const EVENT_STYLES: Record<EventType, string> = {
-  coop:      "bg-primary/15 border-primary/50 text-primary",
-  fieldtrip: "bg-accent/15 border-accent/50 text-accent",
-  tuition:   "bg-secondary/15 border-secondary/50 text-secondary",
+  coop:      "bg-primary/15 border-primary/50 text-primary hover:bg-primary/25",
+  fieldtrip: "bg-accent/15 border-accent/50 text-accent hover:bg-accent/25",
+  tuition:   "bg-secondary/15 border-secondary/50 text-secondary hover:bg-secondary/25",
 }
 
 const EVENT_ICONS: Record<EventType, string> = {
@@ -44,7 +44,11 @@ const EVENT_ICONS: Record<EventType, string> = {
   tuition:   "⏰",
 }
 
-export function CalendarView() {
+interface CalendarViewProps {
+  onNavigate?: (view: "calendar" | "kendall" | "westchester" | "tuition") => void
+}
+
+export function CalendarView({ onNavigate }: CalendarViewProps) {
   // September 2026: starts on Tuesday (day index 2)
   const monthName = "September 2026"
   const startDayIndex = 2  // Tuesday
@@ -61,6 +65,17 @@ export function CalendarView() {
   const getEventsForDay = (day: number) =>
     EVENTS.filter((e) => e.day === day)
 
+  const handleEventClick = (ev: CalendarEvent) => {
+    if (!onNavigate) return
+
+    if (ev.type === "coop") {
+      const isKendall = ev.label.toLowerCase().includes("kendall")
+      onNavigate(isKendall ? "kendall" : "westchester")
+    } else if (ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")) {
+      onNavigate("tuition")
+    }
+  }
+
   return (
     <div className="space-y-6">
       {/* Month header */}
@@ -72,7 +87,7 @@ export function CalendarView() {
         <div className="flex gap-3 flex-wrap">
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-primary">
             <span className="w-3 h-3 rounded-full bg-primary inline-block" />
-            Co-op Day
+            Co-op Day (Clickable)
           </span>
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-accent">
             <span className="w-3 h-3 rounded-full bg-accent inline-block" />
@@ -80,7 +95,7 @@ export function CalendarView() {
           </span>
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-secondary">
             <span className="w-3 h-3 rounded-full bg-secondary inline-block" />
-            Deadline / Due
+            Deadline (Clickable)
           </span>
         </div>
       </div>
@@ -125,15 +140,25 @@ export function CalendarView() {
                     </span>
                   </div>
                   <div className="space-y-0.5 mt-1 flex-grow overflow-y-auto">
-                    {events.map((ev, i) => (
-                      <div
-                        key={i}
-                        className={`text-[9px] font-black px-1 py-0.5 rounded-md border leading-tight ${EVENT_STYLES[ev.type]}`}
-                        title={ev.label}
-                      >
-                        {EVENT_ICONS[ev.type]} {ev.label}
-                      </div>
-                    ))}
+                    {events.map((ev, i) => {
+                      const isClickable = ev.type === "coop" || ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => handleEventClick(ev)}
+                          disabled={!isClickable}
+                          className={`
+                            w-full text-left text-[9px] font-black px-1 py-0.5 rounded-md border leading-tight block
+                            transition-all duration-150
+                            ${EVENT_STYLES[ev.type]}
+                            ${isClickable ? "cursor-pointer active:scale-95 shadow-sm" : "opacity-90"}
+                          `}
+                          title={isClickable ? `${ev.label} (Click to open)` : ev.label}
+                        >
+                          {EVENT_ICONS[ev.type]} {ev.label}
+                        </button>
+                      )
+                    })}
                   </div>
                 </>
               ) : (
@@ -153,6 +178,8 @@ export function CalendarView() {
             <strong>Kendall Campus:</strong> Meets Tuesdays (1st, 8th, 15th, 22nd) exploring "My Community & Me". Sept 29th is a free week!
             <br />
             <strong className="mt-1 inline-block">Westchester Campus:</strong> Meets Thursdays (3rd, 10th, 17th, 24th) exploring "All About Me & My Body".
+            <br />
+            <span className="text-[10px] text-primary/80 font-bold block mt-1">💡 Click any Co-Op badge on the calendar to open its study details!</span>
           </p>
         </div>
         <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
@@ -173,6 +200,8 @@ export function CalendarView() {
             <strong>Sept 7th:</strong> Field Trip funds ($10) are due to confirm booking.
             <br />
             <strong>Sept 15th:</strong> October Co-Op Tuition due ($125). Click the "Pay Tuition" tab above to checkout safely.
+            <br />
+            <span className="text-[10px] text-secondary/80 font-bold block mt-1">💡 Click any deadline badge on the calendar to open checkout!</span>
           </p>
         </div>
       </div>
