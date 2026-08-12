@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
 type EventType = "coop" | "fieldtrip" | "tuition"
@@ -8,6 +10,17 @@ interface CalendarEvent {
   day: number
   type: EventType
   label: string
+}
+
+interface FieldTripDetails {
+  title: string
+  date: string
+  time: string
+  cost: string
+  location: string
+  description: string
+  bring: string
+  icon: string
 }
 
 const EVENTS: CalendarEvent[] = [
@@ -32,6 +45,39 @@ const EVENTS: CalendarEvent[] = [
   { day: 25, type: "fieldtrip", label: "Top Golf Field Trip (11am)" },
 ]
 
+const FIELD_TRIPS: Record<number, FieldTripDetails> = {
+  11: {
+    title: "Salvatore Park Play Date Picnic",
+    date: "Friday, September 11, 2026",
+    time: "11:00 AM",
+    cost: "FREE",
+    location: "Salvatore Park, Coral Gables",
+    description: "Pack a cozy blanket and your favorite snacks for our welcoming Co-Op Play Date Picnic! It's the perfect opportunity for children to bond, play on the playground, and for parents to chat and share homeschool rhythms. Sibling-friendly!",
+    bring: "Picnic blanket, lunch/snacks, water bottles, and sunscreen.",
+    icon: "🧺",
+  },
+  16: {
+    title: "DIY Squishy Party",
+    date: "Wednesday, September 16, 2026",
+    time: "11:30 AM",
+    cost: "$10 per child",
+    location: "Glades Park, Doral",
+    description: "Let's get creative and tactile! Kids will design, paint, and customize their very own slow-rising squishy toys. All paint, decorations, and squishy bases are included in the fee.",
+    bring: "Wear messy-friendly clothes (acrylic paints will be used) and a creative spirit!",
+    icon: "🧸",
+  },
+  25: {
+    title: "Field Trip Friday: Top Golf Doral",
+    date: "Friday, September 25, 2026",
+    time: "11:00 AM",
+    cost: "$10 per person",
+    location: "Topgolf Doral (10611 NW 19th St, Doral, FL 33172)",
+    description: "Tee off with your co-op friends! We have reserved bays for private group play where kids can learn basic golf swing coordination, play fun target games, and enjoy child-friendly lunch options. Great for all skill levels!",
+    bring: "Comfortable active wear, sneakers, and sports water bottle.",
+    icon: "⛳",
+  },
+}
+
 const EVENT_STYLES: Record<EventType, string> = {
   coop:      "bg-primary/15 border-primary/50 text-primary hover:bg-primary/25",
   fieldtrip: "bg-accent/15 border-accent/50 text-accent hover:bg-accent/25",
@@ -49,6 +95,8 @@ interface CalendarViewProps {
 }
 
 export function CalendarView({ onNavigate }: CalendarViewProps) {
+  const [selectedTrip, setSelectedTrip] = useState<FieldTripDetails | null>(null)
+
   // September 2026: starts on Tuesday (day index 2)
   const monthName = "September 2026"
   const startDayIndex = 2  // Tuesday
@@ -66,13 +114,18 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
     EVENTS.filter((e) => e.day === day)
 
   const handleEventClick = (ev: CalendarEvent) => {
-    if (!onNavigate) return
-
-    if (ev.type === "coop") {
-      const isKendall = ev.label.toLowerCase().includes("kendall")
-      onNavigate(isKendall ? "kendall" : "westchester")
-    } else if (ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")) {
-      onNavigate("tuition")
+    if (ev.type === "fieldtrip") {
+      const trip = FIELD_TRIPS[ev.day]
+      if (trip) {
+        setSelectedTrip(trip)
+      }
+    } else if (onNavigate) {
+      if (ev.type === "coop") {
+        const isKendall = ev.label.toLowerCase().includes("kendall")
+        onNavigate(isKendall ? "kendall" : "westchester")
+      } else if (ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")) {
+        onNavigate("tuition")
+      }
     }
   }
 
@@ -87,15 +140,15 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
         <div className="flex gap-3 flex-wrap">
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-primary">
             <span className="w-3 h-3 rounded-full bg-primary inline-block" />
-            Co-op Day (Clickable)
+            Co-op Day (Opens study)
           </span>
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-accent">
             <span className="w-3 h-3 rounded-full bg-accent inline-block" />
-            Field Trip / Party
+            Field Trip (Click to open bubble)
           </span>
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-secondary">
             <span className="w-3 h-3 rounded-full bg-secondary inline-block" />
-            Deadline (Clickable)
+            Deadline / Pay
           </span>
         </div>
       </div>
@@ -141,19 +194,16 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
                   </div>
                   <div className="space-y-0.5 mt-1 flex-grow overflow-y-auto">
                     {events.map((ev, i) => {
-                      const isClickable = ev.type === "coop" || ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")
                       return (
                         <button
                           key={i}
                           onClick={() => handleEventClick(ev)}
-                          disabled={!isClickable}
                           className={`
                             w-full text-left text-[9px] font-black px-1 py-0.5 rounded-md border leading-tight block
-                            transition-all duration-150
+                            transition-all duration-150 cursor-pointer active:scale-95 shadow-sm
                             ${EVENT_STYLES[ev.type]}
-                            ${isClickable ? "cursor-pointer active:scale-95 shadow-sm" : "opacity-90"}
                           `}
-                          title={isClickable ? `${ev.label} (Click to open)` : ev.label}
+                          title={`${ev.label} (Click to open)`}
                         >
                           {EVENT_ICONS[ev.type]} {ev.label}
                         </button>
@@ -168,6 +218,103 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
           )
         })}
       </div>
+
+      {/* Field Trip Modal Pop-up Bubble */}
+      {selectedTrip && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedTrip.title}
+        >
+          <div className="bg-card rounded-3xl shadow-2xl max-w-md w-full p-6 relative border-2 border-accent/30 animate-in zoom-in-95 duration-200">
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedTrip(null)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-muted hover:bg-muted-foreground/10 flex items-center justify-center font-bold text-foreground text-lg transition-colors border border-border"
+              aria-label="Close modal"
+            >
+              ✕
+            </button>
+
+            {/* Content header */}
+            <div className="flex gap-4 items-start mb-4 pr-8">
+              <div className="w-16 h-16 rounded-2xl bg-accent/15 border-2 border-accent/30 flex items-center justify-center text-4xl flex-shrink-0 shadow-sm">
+                {selectedTrip.icon}
+              </div>
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-accent bg-accent/10 border border-accent/20 px-2.5 py-1 rounded-full">
+                  Field Trip / Outing
+                </span>
+                <h3 className="text-xl font-black text-foreground mt-1.5 leading-snug">{selectedTrip.title}</h3>
+              </div>
+            </div>
+
+            {/* Quick Details Box */}
+            <div className="bg-muted rounded-2xl p-4 text-xs space-y-2.5 mb-4 border border-border">
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground font-black uppercase">🗓️ Date</span>
+                <span className="text-foreground font-black">{selectedTrip.date}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground font-black uppercase">⏰ Time</span>
+                <span className="text-foreground font-black">{selectedTrip.time}</span>
+              </div>
+              <div className="flex justify-between items-center font-bold">
+                <span className="text-accent font-black uppercase">💰 Cost</span>
+                <span className="text-accent font-black text-sm bg-accent/10 border border-accent/20 px-2.5 py-0.5 rounded-full">
+                  {selectedTrip.cost}
+                </span>
+              </div>
+              <div className="flex justify-between items-start gap-2 pt-1 border-t border-border/60">
+                <span className="text-muted-foreground font-black uppercase flex-shrink-0">📍 Location</span>
+                <span className="text-foreground font-black text-right">{selectedTrip.location}</span>
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="space-y-3 mb-6">
+              <div>
+                <h4 className="text-xs font-black text-foreground uppercase tracking-wider">About the Event</h4>
+                <p className="text-xs text-muted-foreground font-semibold mt-1 leading-relaxed">
+                  {selectedTrip.description}
+                </p>
+              </div>
+              <div className="border-t border-border pt-3">
+                <h4 className="text-xs font-black text-foreground uppercase tracking-wider flex items-center gap-1">
+                  🎒 What to Bring
+                </h4>
+                <p className="text-xs text-muted-foreground font-semibold mt-1 leading-relaxed">
+                  {selectedTrip.bring}
+                </p>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex gap-3">
+              {selectedTrip.cost !== "FREE" && (
+                <button
+                  onClick={() => {
+                    setSelectedTrip(null)
+                    onNavigate?.("tuition")
+                  }}
+                  className="flex-grow py-3 rounded-2xl bg-secondary text-white font-black text-xs hover:opacity-95 transition-opacity active:scale-98 shadow-md"
+                >
+                  💳 Pay Field Trip Fee
+                </button>
+              )}
+              <button
+                onClick={() => setSelectedTrip(null)}
+                className={`py-3 rounded-2xl font-black text-xs hover:bg-muted-foreground/10 transition-colors border border-border text-center ${
+                  selectedTrip.cost === "FREE" ? "bg-accent text-white hover:opacity-95 border-none flex-grow" : "px-6 bg-card text-foreground"
+                }`}
+              >
+                {selectedTrip.cost === "FREE" ? "Can't Wait! 🎉" : "Close"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Event details cards */}
       <div className="grid sm:grid-cols-3 gap-4 pt-2">
@@ -191,6 +338,8 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
             <strong>Sept 16 (11:30am):</strong> DIY Squishy Party ($10/child) at Glades Park Doral.
             <br />
             <strong>Sept 25 (11am):</strong> Field Trip to Top Golf in Doral ($10/person).
+            <br />
+            <span className="text-[10px] text-accent/80 font-bold block mt-1">💡 Click any Field Trip badge on the calendar to see full details!</span>
           </p>
         </div>
         <div className="rounded-2xl border-2 border-secondary/30 bg-secondary/5 p-5">
