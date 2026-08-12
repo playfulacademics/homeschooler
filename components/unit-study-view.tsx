@@ -13,43 +13,43 @@ interface WeekData {
 const KENDALL_WEEKS: WeekData[] = [
   {
     week: 1,
-    topic: "The Skeletal System",
-    activity: "Building a Paper Skeleton",
+    topic: "Get to Know Me",
+    activity: "First Day of Co-Op: Super Hero Me & Time Capsule",
     description:
-      "Explore the 206 bones that hold us together! Students will trace, cut, and assemble a life-sized paper skeleton, labeling major bones along the way.",
-    icon: "🦴",
+      "Welcome to Co-Op! Today we create our Super Hero identities and pack our Time Capsules. We'll also study our Artist of the Month, Frida Kahlo, and paint self-portraits.",
+    icon: "🦸‍♀️",
     color: "primary",
-    funFact: "Fun Fact: The femur (thigh bone) is the longest and strongest bone in your body!",
+    funFact: "Artist Spotlight: Frida Kahlo is famous for her colorful self-portraits. She painted her own reality!",
   },
   {
     week: 2,
-    topic: "Five Senses",
-    activity: "Sensory Walk & Blind Taste Tests",
+    topic: "The Community",
+    activity: "City Building & Synergy (Inspired by 'Elemental')",
     description:
-      "Tune into sight, sound, smell, touch, and taste! Students go on a guided sensory walk outdoors, then return for a fun blind taste-test adventure.",
-    icon: "👁️",
+      "Explore community dynamics through Project-Based Learning (PBL) with 'Elemental'. Together we'll build a cooperative cardboard city, practicing true synergy, and craft Frida's 'La Casa Azul' (Blue House).",
+    icon: "🏢",
     color: "accent",
-    funFact: "Fun Fact: Your nose can detect over 1 trillion different smells!",
+    funFact: "Synergy Power: Synergy means the whole is greater than the sum of its parts—we achieve more together!",
   },
   {
     week: 3,
-    topic: "The Heart & Circulation",
-    activity: "Mindful PE & Heart Rate Tracking",
+    topic: "Entrepreneurship Week",
+    activity: "Starting My Business: Logo, Name & Idea",
     description:
-      "Feel your heart pump! Students learn how blood travels through the body, then track their own resting and active heart rates during mindful PE exercises.",
-    icon: "❤️",
+      "Time to build! Brainstorm your business ideas, choose a trade name, and design your first logo. Mindful PE today is packed with coordination brain games and high-energy movement.",
+    icon: "💼",
     color: "secondary",
-    funFact: "Fun Fact: Your heart beats about 100,000 times every single day!",
+    funFact: "Brain Fact: Cross-lateral movements (like brain games) help activate both sides of your brain!",
   },
   {
     week: 4,
-    topic: "Healthy Habits & Nutrition",
-    activity: "Self-Portraits with Healthy Foods",
+    topic: "Geography",
+    activity: "Florida Travelers Poster, Everglades & Squeezed OJ",
     description:
-      "We are what we eat! Students create colorful self-portraits surrounded by their favorite fruits and veggies, while learning about food groups and nutrition.",
-    icon: "🥦",
+      "Journey through Florida and the Everglades! Bring your workbooks and textbooks to design a travel poster. For Practical Life Skills (PLS), we will squeeze fresh Florida orange juice and share Cuban bread.",
+    icon: "🐊",
     color: "success",
-    funFact: "Fun Fact: Eating a rainbow of colors gives your body lots of different vitamins!",
+    funFact: "Everglades Wonder: The Florida Everglades is a slow-moving river of grass, and the only place on Earth where alligators and crocodiles coexist!",
   },
 ]
 
@@ -153,18 +153,18 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
       {/* Unit header */}
       <div className={`rounded-2xl bg-gradient-to-r ${headerGradient} border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-4`}>
         <div className="text-5xl" role="img" aria-label="unit-icon">
-          {isKendall ? "🫀" : "💼"}
+          {isKendall ? "🦸‍♀️" : "💼"}
         </div>
         <div>
           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">
             {isKendall ? "Kendall Campus Study" : "Westchester Campus Study"}
           </div>
           <h2 className={`text-2xl font-black ${titleColor}`}>
-            {isKendall ? "My Body" : "Little Entrepreneurs"}
+            {isKendall ? "My Community & Me" : "Little Entrepreneurs"}
           </h2>
           <p className="text-sm text-muted-foreground font-semibold mt-1">
             {isKendall
-              ? "4-week deep dive exploring the amazing human body through hands-on anatomy, movement, and tracking!"
+              ? "4-week hands-on journey discovering identity, collaborative community synergy, starting a business, and Florida geography!"
               : "4-week business and branding crash-course turning kids into real founders with product ideas and a live marketplace!"}
           </p>
         </div>
@@ -241,18 +241,45 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
       </div>
 
       {/* Supplies / Action reminder */}
-      <div className="rounded-2xl bg-muted border border-border p-4 flex gap-3 items-start">
-        <span className="text-2xl">{isKendall ? "🎒" : "💰"}</span>
-        <div>
-          <h4 className="font-black text-sm text-foreground">
-            {isKendall ? "Supply Reminder" : "Action Required"}
-          </h4>
-          <p className="text-xs text-muted-foreground font-semibold mt-1 leading-relaxed">
-            {isKendall
-              ? "For this week's Five Senses activities, please pack a small mystery snack and a blindfold (a bandana works great!). See the full supply list on the co-op portal."
-              : "For this week's Costs & Margins exercises, please help your child list 3 simple household supplies they plan to use for their product and discuss how much those cost."}
-          </p>
+      <div className="rounded-2xl bg-muted border border-border p-5 space-y-4">
+        <div className="flex gap-3 items-center">
+          <span className="text-3xl">🎒</span>
+          <div>
+            <h4 className="font-black text-base text-foreground">
+              {isKendall ? "Supplies for the Month" : "Action Required"}
+            </h4>
+            <p className="text-xs text-muted-foreground font-bold mt-0.5">
+              {isKendall 
+                ? "⚠️ Note: Your Co-Op Workbook is needed each week!"
+                : "⚠️ Note: Please check your project supplies weekly!"}
+            </p>
+          </div>
         </div>
+        
+        {isKendall ? (
+          <div className="grid gap-3 sm:grid-cols-2 text-xs">
+            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+              <span className="font-black text-primary">Week 1 Supplies:</span>
+              <p className="text-muted-foreground font-semibold">Scissors, pencil, glue, tray, oil pastels</p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+              <span className="font-black text-accent">Week 2 Supplies:</span>
+              <p className="text-muted-foreground font-semibold">Medium to large cardboard box, 2 empty paper towel or toilet paper rolls, wood glue or glue gun</p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+              <span className="font-black text-secondary">Week 3 Supplies:</span>
+              <p className="text-muted-foreground font-semibold">Investment Activity Book</p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+              <span className="font-black text-success">Week 4 Supplies:</span>
+              <p className="text-muted-foreground font-semibold">Passport America Book, large poster board, hand-held juicer, all-purpose glue or glue gun</p>
+            </div>
+          </div>
+        ) : (
+          <p className="text-xs text-muted-foreground font-semibold leading-relaxed">
+            For this week's Costs & Margins exercises, please help your child list 3 simple household supplies they plan to use for their product and discuss how much those cost.
+          </p>
+        )}
       </div>
     </div>
   )
