@@ -91,7 +91,7 @@ const EVENT_ICONS: Record<EventType, string> = {
 }
 
 interface CalendarViewProps {
-  onNavigate?: (view: "calendar" | "kendall" | "westchester" | "tuition") => void
+  onNavigate?: (view: "calendar" | "kendall" | "westchester") => void
 }
 
 export function CalendarView({ onNavigate }: CalendarViewProps) {
@@ -119,12 +119,12 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
       if (trip) {
         setSelectedTrip(trip)
       }
-    } else if (onNavigate) {
-      if (ev.type === "coop") {
+    } else {
+      if (ev.type === "coop" && onNavigate) {
         const isKendall = ev.label.toLowerCase().includes("kendall")
         onNavigate(isKendall ? "kendall" : "westchester")
       } else if (ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")) {
-        onNavigate("tuition")
+        window.open("https://playfulacademics.com", "_blank")
       }
     }
   }
@@ -148,7 +148,7 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
           </span>
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-secondary">
             <span className="w-3 h-3 rounded-full bg-secondary inline-block" />
-            Deadline / Pay
+            Deadline / Pay (Opens Website)
           </span>
         </div>
       </div>
@@ -293,15 +293,14 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
             {/* Actions */}
             <div className="flex gap-3">
               {selectedTrip.cost !== "FREE" && (
-                <button
-                  onClick={() => {
-                    setSelectedTrip(null)
-                    onNavigate?.("tuition")
-                  }}
-                  className="flex-grow py-3 rounded-2xl bg-secondary text-white font-black text-xs hover:opacity-95 transition-opacity active:scale-98 shadow-md"
+                <a
+                  href="https://playfulacademics.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-grow py-3 rounded-2xl bg-secondary text-white font-black text-xs hover:opacity-95 transition-all text-center flex items-center justify-center shadow-md active:scale-98"
                 >
                   💳 Pay Field Trip Fee
-                </button>
+                </a>
               )}
               <button
                 onClick={() => setSelectedTrip(null)}
@@ -348,9 +347,9 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed font-semibold">
             <strong>Sept 7th:</strong> Field Trip funds ($10) are due to confirm booking.
             <br />
-            <strong>Sept 15th:</strong> October Co-Op Tuition due ($125). Click the "Pay Tuition" tab above to checkout safely.
+            <strong>Sept 15th:</strong> October Co-Op Tuition due ($125). Click to open the main site to make payments.
             <br />
-            <span className="text-[10px] text-secondary/80 font-bold block mt-1">💡 Click any deadline badge on the calendar to open checkout!</span>
+            <span className="text-[10px] text-secondary/80 font-bold block mt-1">💡 Click any deadline badge on the calendar to open our website!</span>
           </p>
         </div>
       </div>

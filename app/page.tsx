@@ -5,28 +5,24 @@ import { DashboardHeader } from "@/components/dashboard-header"
 import { NavButtons, type ActiveView } from "@/components/nav-buttons"
 import { CalendarView } from "@/components/calendar-view"
 import { UnitStudyView } from "@/components/unit-study-view"
-import { TuitionView } from "@/components/tuition-view"
 import { DashboardFooter } from "@/components/dashboard-footer"
 
 const VIEW_LABELS: Record<ActiveView, string> = {
   calendar: "Monthly Calendar",
   kendall: "Kendall Co-Op Unit Study",
   westchester: "Westchester Co-Op Unit Study",
-  tuition: "Pay Tuition",
 }
 
 const VIEW_BORDER: Record<ActiveView, string> = {
   calendar: "border-accent/30",
   kendall: "border-primary/30",
   westchester: "border-indigo-500/30",
-  tuition: "border-secondary/30",
 }
 
 const VIEW_HEADER_BG: Record<ActiveView, string> = {
   calendar: "from-accent/10 to-transparent",
   kendall: "from-primary/10 to-transparent",
   westchester: "from-indigo-500/10 to-transparent",
-  tuition: "from-secondary/10 to-transparent",
 }
 
 export default function Home() {
@@ -63,7 +59,6 @@ export default function Home() {
               {activeView === "calendar" && <CalendarView onNavigate={setActiveView} />}
               {activeView === "kendall" && <UnitStudyView location="kendall" />}
               {activeView === "westchester" && <UnitStudyView location="westchester" />}
-              {activeView === "tuition" && <TuitionView />}
             </div>
           </div>
         </section>
