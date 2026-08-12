@@ -29,7 +29,7 @@ const EVENTS: CalendarEvent[] = [
   { day: 8, type: "coop", label: "Kendall: The Community" },
   { day: 15, type: "coop", label: "Kendall: Entrepreneurship" },
   { day: 22, type: "coop", label: "Kendall: Geography" },
-  // Note: Sept 29 is left blank as a free week
+  { day: 29, type: "fieldtrip", label: "M&H Merge Day (12pm)" },
 
   // Westchester Co-Ops (Thursdays)
   { day: 3, type: "coop", label: "Westchester: About Me" },
@@ -75,6 +75,16 @@ const FIELD_TRIPS: Record<number, FieldTripDetails> = {
     description: "Tee off with your co-op friends! We have reserved bays for private group play where kids can learn basic golf swing coordination, play fun target games, and enjoy child-friendly lunch options. Great for all skill levels!",
     bring: "Comfortable active wear, sneakers, and sports water bottle.",
     icon: "⛳",
+  },
+  29: {
+    title: "Miami & Homestead Homeschoolers Merge Day",
+    date: "Tuesday, September 29, 2026",
+    time: "12:00 PM",
+    cost: "FREE",
+    location: "Co-Op Meetup Ground / Park",
+    description: "Our co op will be merging with the Miami & Homestead Homeschoolers group to socialize, do a scavenger hunt, and enjoy a good time together! It's a wonderful opportunity to build wider community connections, make new friends, and share resources.",
+    bring: "Comfortable running shoes for the scavenger hunt, water bottles, snacks, and a big smile!",
+    icon: "🤝",
   },
 }
 
@@ -321,7 +331,7 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
           <div className="text-2xl mb-2">🏫</div>
           <h3 className="font-black text-primary text-sm">Weekly Co-Ops</h3>
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed font-semibold">
-            <strong>Kendall Campus:</strong> Meets Tuesdays (1st, 8th, 15th, 22nd) exploring "My Community & Me". Sept 29th is a free week!
+            <strong>Kendall Campus:</strong> Meets Tuesdays (1st, 8th, 15th, 22nd, 29th). Sept 29th is our exciting Miami & Homestead Merge Day!
             <br />
             <strong className="mt-1 inline-block">Westchester Campus:</strong> Meets Thursdays (3rd, 10th, 17th, 24th) exploring "All About Me & My Body".
             <br />
