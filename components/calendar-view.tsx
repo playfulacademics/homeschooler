@@ -61,7 +61,7 @@ const FIELD_TRIPS: Record<number, FieldTripDetails> = {
     date: "Wednesday, September 16, 2026",
     time: "11:30 AM",
     cost: "$10 per child",
-    location: "Glades Park, Doral",
+    location: "Larry & Penny Park",
     description: "Let's get creative and tactile! Kids will design, paint, and customize their very own slow-rising squishy toys. All paint, decorations, and squishy bases are included in the fee.",
     bring: "Wear messy-friendly clothes (acrylic paints will be used) and a creative spirit!",
     icon: "🧸",
@@ -334,7 +334,7 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed font-semibold">
             <strong>Sept 11 (11am):</strong> Salvatore Park Play Date Picnic!
             <br />
-            <strong>Sept 16 (11:30am):</strong> DIY Squishy Party ($10/child) at Glades Park Doral.
+            <strong>Sept 16 (11:30am):</strong> DIY Squishy Party ($10/child) at Larry & Penny Park.
             <br />
             <strong>Sept 25 (11am):</strong> Field Trip to Top Golf in Doral ($10/person).
             <br />
