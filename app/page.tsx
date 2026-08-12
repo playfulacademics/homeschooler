@@ -30,7 +30,7 @@ const VIEW_HEADER_BG: Record<ActiveView, string> = {
 }
 
 export default function Home() {
-  const [activeView, setActiveView] = useState<ActiveView>("kendall")
+  const [activeView, setActiveView] = useState<ActiveView>("calendar")
 
   return (
     <main className="min-h-screen bg-background">
