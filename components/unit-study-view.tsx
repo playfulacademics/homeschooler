@@ -56,43 +56,43 @@ const KENDALL_WEEKS: WeekData[] = [
 const WESTCHESTER_WEEKS: WeekData[] = [
   {
     week: 1,
-    topic: "Branding & Brainstorming",
-    activity: "Create a Logo & Tagline",
+    topic: "About Me",
+    activity: "First Week of Co-Op: Time Capsules & School Sensory Bin Ipsy",
     description:
-      "Learn how real businesses catch our eye! Students brainstorm their own unique product ideas, design hand-drawn logos, and write catchy taglines.",
+      "Welcome to Westchester Co-Op! Explore identity through interactive time capsules, school-themed sensory bins, and parachute movement games. Paint a creative self-portrait using natural loose parts.",
     icon: "🎨",
     color: "primary",
-    funFact: "Fun Fact: The famous Nike 'Swoosh' logo was designed by a student for only $35 in 1971!",
+    funFact: "Loose Parts Play: Using everyday loose items (buttons, shells, twigs) helps children develop higher-level problem solving and abstract thinking!",
   },
   {
     week: 2,
-    topic: "Costs & Margins",
-    activity: "Setting up a Profit Table",
+    topic: "5 Senses",
+    activity: "Senses Exploration, Scavenger Hunt & Sensory Jars",
     description:
-      "Real-world math in action! Using Singapore Math concepts, students calculate the cost of raw materials (supplies) versus selling prices to find their profit margins.",
-    icon: "📊",
+      "We learn with our whole bodies! Students will participate in a guided multi-sensory exploration, hunt for clues outdoors on a scavenger hunt, and craft custom Sensory Jars to take home.",
+    icon: "👁️",
     color: "accent",
-    funFact: "Fun Fact: Profit is the money left over after paying for supplies. Business math makes finance exciting!",
+    funFact: "Fun Fact: Did you know sensory jars can help calm and soothe the nervous system? They're wonderful practical tools!",
   },
   {
     week: 3,
-    topic: "Marketing & Commercial Pitches",
-    activity: "Record a 30-Second Elevator Pitch",
+    topic: "My Body",
+    activity: "Trace Me & My Lungs (Music & Movement)",
     description:
-      "Stand tall and share your passion! Students practice public speaking by drafting and recording a 30-second commercial to pitch their brand to families.",
-    icon: "🎙️",
+      "See how big we are! Children will trace each other's full bodies on butcher paper and build a working diagram model of the lungs to explore respiration. Active music and movement games keep us laughing and exercising.",
+    icon: "🫁",
     color: "secondary",
-    funFact: "Fun Fact: Good marketing is simply telling a compelling, honest story about how your product helps someone else!",
+    funFact: "Lung Power: Your left lung is slightly smaller than your right lung to make room for your heart!",
   },
   {
     week: 4,
-    topic: "The Live Co-Op Marketplace",
-    activity: "Selling Hand-Crafted Products",
+    topic: "Germs & Nutrition",
+    activity: "Germ Experiment & Fruit Sticks PLS",
     description:
-      "Real-world trading day! Students set up mini-storefront booths to showcase and trade their actual creations using co-op play tokens with families.",
-    icon: "🎪",
+      "Discover the power of clean hands with a magical pepper-and-soap germ experiment! For Practical Life Skills (PLS), children wash, slice, and thread colorful fruits of choice onto fruit sticks. Includes Mindful PE.",
+    icon: "🦠",
     color: "success",
-    funFact: "Fun Fact: Many of today's most successful entrepreneurs started their very first businesses before they turned 10!",
+    funFact: "Fruit Rainbow: Squeezing, washing, and slicing fruits is a great Montessori practical life skill that strengthens fine motor control and independence!",
   },
 ]
 
@@ -153,19 +153,19 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
       {/* Unit header */}
       <div className={`rounded-2xl bg-gradient-to-r ${headerGradient} border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-4`}>
         <div className="text-5xl" role="img" aria-label="unit-icon">
-          {isKendall ? "🦸‍♀️" : "💼"}
+          {isKendall ? "🦸‍♀️" : "🎨"}
         </div>
         <div>
           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">
             {isKendall ? "Kendall Campus Study" : "Westchester Campus Study"}
           </div>
           <h2 className={`text-2xl font-black ${titleColor}`}>
-            {isKendall ? "My Community & Me" : "Little Entrepreneurs"}
+            {isKendall ? "My Community & Me" : "All About Me & My Body"}
           </h2>
           <p className="text-sm text-muted-foreground font-semibold mt-1">
             {isKendall
               ? "4-week hands-on journey discovering identity, collaborative community synergy, starting a business, and Florida geography!"
-              : "4-week business and branding crash-course turning kids into real founders with product ideas and a live marketplace!"}
+              : "4-week multi-sensory adventure exploring self-identity, the 5 senses, skeletal/lung systems, germs, and practical life skills!"}
           </p>
         </div>
         <div className="sm:ml-auto flex flex-col items-start sm:items-end gap-1">
@@ -246,12 +246,12 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
           <span className="text-3xl">🎒</span>
           <div>
             <h4 className="font-black text-base text-foreground">
-              {isKendall ? "Supplies for the Month" : "Action Required"}
+              {isKendall ? "Supplies for the Month" : "Supplies Needed for the Month"}
             </h4>
             <p className="text-xs text-muted-foreground font-bold mt-0.5">
               {isKendall 
                 ? "⚠️ Note: Your Co-Op Workbook is needed each week!"
-                : "⚠️ Note: Please check your project supplies weekly!"}
+                : "⚠️ Note: Coordinate weekly supplies for Westchester group!"}
             </p>
           </div>
         </div>
@@ -276,9 +276,26 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
             </div>
           </div>
         ) : (
-          <p className="text-xs text-muted-foreground font-semibold leading-relaxed">
-            For this week's Costs & Margins exercises, please help your child list 3 simple household supplies they plan to use for their product and discuss how much those cost.
-          </p>
+          <div className="grid gap-3 sm:grid-cols-2 text-xs">
+            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+              <span className="font-black text-indigo-500">Week 1 Supplies:</span>
+              <p className="text-muted-foreground font-semibold">Supply Box</p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+              <span className="font-black text-accent">Week 2 Supplies:</span>
+              <p className="text-muted-foreground font-semibold">Super glue (for parent use only)</p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+              <span className="font-black text-secondary">Week 3 Supplies:</span>
+              <p className="text-muted-foreground font-semibold">Supply Box and 8 by 10 piece of cardboard</p>
+            </div>
+            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
+              <span className="font-black text-success">Week 4 Supplies:</span>
+              <p className="text-muted-foreground font-semibold">
+                Bring one fruit of choice. 💬 Please communicate in the WhatsApp group chat to ensure no one brings duplicates!
+              </p>
+            </div>
+          </div>
         )}
       </div>
     </div>
