@@ -157,12 +157,17 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
         </div>
         <div>
           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">
-            {isKendall ? "Kendall Campus Study" : "Westchester Campus Study"}
+            {isKendall ? "Kendall Co Op Study" : "Westchester Co Op Study"}
           </div>
           <h2 className={`text-2xl font-black ${titleColor}`}>
             {isKendall ? "My Community & Me" : "All About Me & My Body"}
           </h2>
-          <p className="text-sm text-muted-foreground font-semibold mt-1">
+          {isKendall && (
+            <div className="inline-flex items-center gap-1.5 bg-primary/10 border border-primary/25 rounded-full px-2.5 py-0.5 text-xs font-black text-primary mt-1.5">
+              🎨 Artist of the Month: Frida Kahlo
+            </div>
+          )}
+          <p className="text-sm text-muted-foreground font-semibold mt-1.5">
             {isKendall
               ? "4-week hands-on journey discovering identity, collaborative community synergy, starting a business, and Florida geography!"
               : "4-week multi-sensory adventure exploring self-identity, the 5 senses, skeletal/lung systems, germs, and practical life skills!"}
