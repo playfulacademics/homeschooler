@@ -19,7 +19,7 @@ const BUTTONS: { id: ActiveView; label: string; icon: string; color: string; act
   {
     id: "october",
     label: "October Calendar",
-    icon: "🎃",
+    icon: "🍁",
     color: "bg-orange-500/10 text-orange-500 border-orange-500/30 hover:bg-orange-500/20",
     activeColor: "bg-orange-500 text-white border-orange-500 shadow-lg shadow-orange-500/30",
     ring: "ring-orange-500/40",

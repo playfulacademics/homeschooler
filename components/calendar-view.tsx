@@ -12,7 +12,7 @@ interface CalendarEvent {
   label: string
 }
 
-interface FieldTripDetails {
+interface EventDetails {
   title: string
   date: string
   time: string
@@ -21,6 +21,7 @@ interface FieldTripDetails {
   description: string
   bring: string
   icon: string
+  actionUrl?: string
 }
 
 const SEPTEMBER_EVENTS: CalendarEvent[] = [
@@ -64,11 +65,61 @@ const OCTOBER_EVENTS: CalendarEvent[] = [
   { day: 14, type: "fieldtrip", label: "Sprouts Field Trip (12pm)" },
   { day: 15, type: "tuition", label: "November Tuition Due" },
   { day: 16, type: "fieldtrip", label: "Grounded Hacienda Trip" },
-  { day: 30, type: "fieldtrip", label: "Halloween Costume Parade" },
 ]
 
-const FIELD_TRIPS: Record<string, FieldTripDetails> = {
-  // September Field Trips
+const EVENTS_DETAILS: Record<string, EventDetails> = {
+  // September Events Details
+  "september-1": {
+    title: "Kendall Co-Op: Get to Know Me",
+    date: "Tuesday, September 1, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Kendall Co-Op Campus",
+    description: "Welcome to our first day of Co-Op! Today we create our custom Super Hero identities and pack our creative Time Capsules. We'll also begin studying our Artist of the Month, Frida Kahlo, and start working on our self-portraits.",
+    bring: "Scissors, pencil, glue, tray, oil pastels, and your Co-Op Workbook.",
+    icon: "🦸‍♀️",
+  },
+  "september-3": {
+    title: "Westchester Co-Op: About Me",
+    date: "Thursday, September 3, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Westchester Co-Op Campus",
+    description: "Welcome Westchester families! Explore identity through interactive time capsules, school-themed sensory bins, and parachute movement games. Paint a creative self-portrait using natural loose parts.",
+    bring: "Supply Box and Co-Op Workbook.",
+    icon: "🎨",
+  },
+  "september-7": {
+    title: "Field Trip Funds Due",
+    date: "Monday, September 7, 2026",
+    time: "All Day",
+    cost: "$10.00",
+    location: "Online Checkout",
+    description: "Field trip funds of $10 are due to secure bookings for our upcoming September outings (DIY Squishy Party & Top Golf). Please click the payment button below to submit.",
+    bring: "A credit/debit card to pay online.",
+    icon: "⏰",
+    actionUrl: "https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD",
+  },
+  "september-8": {
+    title: "Kendall Co-Op: The Community",
+    date: "Tuesday, September 8, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Kendall Co-Op Campus",
+    description: "Explore community dynamics through Project-Based Learning (PBL) with 'Elemental'. Together we'll build a cooperative cardboard city, practicing true synergy, and craft Frida's 'La Casa Azul' (Blue House).",
+    bring: "Medium to large cardboard box, 2 empty paper towel or toilet paper rolls, wood glue or glue gun, and Co-Op Workbook.",
+    icon: "🏢",
+  },
+  "september-10": {
+    title: "Westchester Co-Op: 5 Senses",
+    date: "Thursday, September 10, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Westchester Co-Op Campus",
+    description: "We learn with our whole bodies! Students will participate in a guided multi-sensory exploration, hunt for clues outdoors on an exciting scavenger hunt, and craft custom Sensory Jars to take home.",
+    bring: "Super glue (for parent use only) and Co-Op Workbook.",
+    icon: "👁️",
+  },
   "september-11": {
     title: "Salvatore Park Play Date Picnic",
     date: "Friday, September 11, 2026",
@@ -79,6 +130,27 @@ const FIELD_TRIPS: Record<string, FieldTripDetails> = {
     bring: "Picnic blanket, lunch/snacks, water bottles, and sunscreen.",
     icon: "🧺",
   },
+  "september-15": {
+    title: "Kendall Co-Op: Entrepreneurship Week",
+    date: "Tuesday, September 15, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Kendall Co-Op Campus",
+    description: "Time to build! Brainstorm your business ideas, choose a trade name, and design your first logo. Mindful PE today is packed with coordination brain games and high-energy movement.",
+    bring: "Investment Activity Book and Co-Op Workbook.",
+    icon: "💼",
+  },
+  "september-15-tuition": {
+    title: "October Tuition Due",
+    date: "Tuesday, September 15, 2026",
+    time: "All Day",
+    cost: "$125.00",
+    location: "Online Checkout",
+    description: "Monthly co-op tuition of $125.00 is due on the 15th of each month for the upcoming October cycle. All fees are 100% non-refundable. Click below to check out securely on our main website.",
+    bring: "Credit/debit card for online payment.",
+    icon: "⏰",
+    actionUrl: "https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD",
+  },
   "september-16": {
     title: "DIY Squishy Party",
     date: "Wednesday, September 16, 2026",
@@ -88,6 +160,36 @@ const FIELD_TRIPS: Record<string, FieldTripDetails> = {
     description: "Let's get creative and tactile! Kids will design, paint, and customize their very own slow-rising squishy toys. All paint, decorations, and squishy bases are included in the fee.",
     bring: "Wear messy-friendly clothes (acrylic paints will be used) and a creative spirit!",
     icon: "🧸",
+  },
+  "september-17": {
+    title: "Westchester Co-Op: My Body",
+    date: "Thursday, September 17, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Westchester Co-Op Campus",
+    description: "See how big we are! Children will trace each other's full bodies on butcher paper and build a working diagram model of the lungs to explore respiration. Active music and movement games keep us laughing and exercising.",
+    bring: "Supply Box, 8 by 10 piece of cardboard, and Co-Op Workbook.",
+    icon: "🫁",
+  },
+  "september-22": {
+    title: "Kendall Co-Op: Geography",
+    date: "Tuesday, September 22, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Kendall Co-Op Campus",
+    description: "Journey through Florida and the Everglades! Bring your workbooks and textbooks to design a travel poster. For Practical Life Skills (PLS), we will squeeze fresh Florida orange juice and share Cuban bread.",
+    bring: "Passport America Book, large poster board, hand-held juicer, all-purpose glue or glue gun, and Co-Op Workbook.",
+    icon: "🐊",
+  },
+  "september-24": {
+    title: "Westchester Co-Op: Germs & Nutrition",
+    date: "Thursday, September 24, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Westchester Co-Op Campus",
+    description: "Discover the power of clean hands with a magical pepper-and-soap germ experiment! For Practical Life Skills (PLS), children wash, slice, and thread colorful fruits of choice onto fruit sticks. Includes Mindful PE.",
+    bring: "Bring one fruit of choice (coordinate in WhatsApp) and Co-Op Workbook.",
+    icon: "🦠",
   },
   "september-25": {
     title: "Field Trip Friday: Top Golf Doral",
@@ -110,7 +212,27 @@ const FIELD_TRIPS: Record<string, FieldTripDetails> = {
     icon: "🤝",
   },
 
-  // October Field Trips
+  // October Events Details
+  "october-1": {
+    title: "Westchester Co-Op: Helpers Intro",
+    date: "Thursday, October 1, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Westchester Co-Op Campus",
+    description: "Kick off our brand new Community Helpers unit study! Interactive introductory activities exploring the heroes who keep our neighborhoods safe, clean, and connected.",
+    bring: "Supply Box and Co-Op Workbook.",
+    icon: "🧑‍🤝‍🧑",
+  },
+  "october-6": {
+    title: "Kendall Co-Op: Perception & PE",
+    date: "Tuesday, October 6, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Kendall Co-Op Campus",
+    description: "Deep dive into sensory perception and awareness. We will study our Artist of the Month, Victoria Villasana, exploring colorful fiber art and embroidery on photographs. Followed by active, coordination-boosting Mindful PE games.",
+    bring: "Co-Op Workbook, personal craft supply kit, and running sneakers.",
+    icon: "👁️",
+  },
   "october-8": {
     title: "Fire Fighters & Fire Station Tour",
     date: "Thursday, October 8, 2026",
@@ -120,6 +242,27 @@ const FIELD_TRIPS: Record<string, FieldTripDetails> = {
     description: "Sound the sirens! Westchester co-op kids are touring the fire station, meeting local firefighter heroes, learning essential fire safety, and exploring a real-life fire truck!",
     bring: "Co-Op Workbook and your favorite firefighter question!",
     icon: "👨‍🚒",
+  },
+  "october-10": {
+    title: "All Field Trip Funds Due",
+    date: "Saturday, October 10, 2026",
+    time: "All Day",
+    cost: "Varies by Trip",
+    location: "Online Checkout",
+    description: "All October field trip registration fees (including Grounded Hacienda and any other paid activities) are strictly due today to finalize co-op group bookings. Please click below to submit payment on our main website.",
+    bring: "Credit/debit card for online payment.",
+    icon: "⏰",
+    actionUrl: "https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD",
+  },
+  "october-13": {
+    title: "Kendall Co-Op: STEM & California",
+    date: "Tuesday, October 13, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Kendall Co-Op Campus",
+    description: "Shockingly fun science! Hands-on STEM exploration building electrical circuits. In Geography, we journey west to explore the diverse landscapes, history, and wonders of California.",
+    bring: "Co-Op Workbook and geography textbook.",
+    icon: "⚡",
   },
   "october-14": {
     title: "Sprouts Field Trip in Kendall",
@@ -131,6 +274,27 @@ const FIELD_TRIPS: Record<string, FieldTripDetails> = {
     bring: "Comfortable sneakers and a hungry tummy for healthy samples!",
     icon: "🌱",
   },
+  "october-15": {
+    title: "Westchester Co-Op: Doctor Day & PE",
+    date: "Thursday, October 15, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Westchester Co-Op Campus",
+    description: "Explore the medical profession, how doctors help us stay healthy, and the tools they use. Followed by energetic, cooperative sports and coordination exercises during PE.",
+    bring: "Supply Box and running sneakers.",
+    icon: "🩺",
+  },
+  "october-15-tuition": {
+    title: "November Tuition Due",
+    date: "Thursday, October 15, 2026",
+    time: "All Day",
+    cost: "$125.00",
+    location: "Online Checkout",
+    description: "Monthly co-op tuition of $125.00 is due on the 15th of each month for the upcoming November cycle. All fees are 100% non-refundable. Click below to check out securely on our main website.",
+    bring: "Credit/debit card for online payment.",
+    icon: "⏰",
+    actionUrl: "https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD",
+  },
   "october-16": {
     title: "Field Trip: Grounded Hacienda",
     date: "Friday, October 16, 2026",
@@ -140,6 +304,37 @@ const FIELD_TRIPS: Record<string, FieldTripDetails> = {
     description: "Escape to the beautiful Grounded Hacienda! Explore nature trails, pet farm animals, and enjoy a gorgeous outdoor group class with co-op friends. A beautiful experiential farm day.",
     bring: "Wear long pants, closed-toe sneakers/boots, sunscreen, water bottle, and a sack lunch.",
     icon: "🏡",
+    actionUrl: "https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD",
+  },
+  "october-20": {
+    title: "Kendall Co-Op: Business Study",
+    date: "Tuesday, October 20, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Kendall Co-Op Campus",
+    description: "Focus on entrepreneurship, starting a business, and analyzing margins (using real-world math). Plus our continuing Artist of the Month study exploring Victoria Villasana's photo-embroidery designs.",
+    bring: "Co-Op Workbook and Investment Activity Book.",
+    icon: "💼",
+  },
+  "october-22": {
+    title: "Westchester Co-Op: Farm Day & Crafts",
+    date: "Thursday, October 22, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Westchester Co-Op Campus",
+    description: "A cozy autumn harvest and farm themed day! Children will explore agricultural concepts and paint, mold, or construct beautiful farm-inspired arts and crafts.",
+    bring: "Supply Box and natural crafting items (leaves, twigs, small pinecones).",
+    icon: "🚜",
+  },
+  "october-27": {
+    title: "Kendall Co-Op: Gacavi Farm Day",
+    date: "Tuesday, October 27, 2026",
+    time: "During Co-Op Hours",
+    cost: "Included in Tuition",
+    location: "Gacavi Farm Grounds (Kendall)",
+    description: "Our Nature & Farm unit study in action! Explore agricultural sciences, local farming ecosystems, animal habitats, and hands-on farm activities designed to connect academics with the land.",
+    bring: "Wear closed-toe shoes/boots, long pants, and bring your nature notebook.",
+    icon: "🌾",
   },
   "october-29": {
     title: "Westchester: Toy Story Day",
@@ -150,16 +345,7 @@ const FIELD_TRIPS: Record<string, FieldTripDetails> = {
     description: "To infinity and beyond! A special themed, play-based free day celebrating Toy Story. Westchester Co-Op members attend for free. Sibling or non-co-op guests are welcome for a guest fee of $35.",
     bring: "Bring your favorite Toy Story toy (labeled with your name) and wear a themed outfit or costume!",
     icon: "🤠",
-  },
-  "october-30": {
-    title: "Halloween Costume Parade",
-    date: "Friday, October 30, 2026",
-    time: "11:30 AM",
-    cost: "FREE",
-    location: "Co-Op Ground / Park",
-    description: "Show off your favorite costumes and share treats! We will have a fun costume parade, music, and healthy treats for the kids. Friendly and non-scary costumes only please.",
-    bring: "A friendly costume, treat bags, and healthy snacks to share!",
-    icon: "🎃",
+    actionUrl: "https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD",
   },
 }
 
@@ -181,7 +367,7 @@ interface CalendarViewProps {
 }
 
 export function CalendarView({ month = "september", onNavigate }: CalendarViewProps) {
-  const [selectedTrip, setSelectedTrip] = useState<FieldTripDetails | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<EventDetails | null>(null)
 
   const isSeptember = month === "september"
   const monthName = isSeptember ? "September 2026" : "October 2026"
@@ -201,16 +387,21 @@ export function CalendarView({ month = "september", onNavigate }: CalendarViewPr
     eventsList.filter((e) => e.day === day)
 
   const handleEventClick = (ev: CalendarEvent) => {
-    if (ev.type === "fieldtrip") {
-      const trip = FIELD_TRIPS[`${month}-${ev.day}`]
-      if (trip) {
-        setSelectedTrip(trip)
-      }
+    // If it's the tuition event on Sept 15 or Oct 15, distinguish it from co-op using unique keys
+    let lookupKey = `${month}-${ev.day}`
+    if (ev.type === "tuition" && ev.day === 15) {
+      lookupKey = `${month}-15-tuition`
+    }
+
+    const details = EVENTS_DETAILS[lookupKey]
+    if (details) {
+      setSelectedEvent(details)
     } else if (onNavigate) {
+      // Fallback if no specific details found
       if (ev.type === "coop") {
         const isKendall = ev.label.toLowerCase().includes("kendall")
         onNavigate(isKendall ? "kendall" : "westchester")
-      } else if (ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")) {
+      } else if (ev.type === "tuition") {
         window.open("https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD", "_blank")
       }
     }
@@ -227,15 +418,15 @@ export function CalendarView({ month = "september", onNavigate }: CalendarViewPr
         <div className="flex gap-3 flex-wrap">
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-primary">
             <span className="w-3 h-3 rounded-full bg-primary inline-block" />
-            Co-op Day (Opens study)
+            Co-op Day (Click for details)
           </span>
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-accent">
             <span className="w-3 h-3 rounded-full bg-accent inline-block" />
-            Field Trip (Click to open bubble)
+            Field Trip (Click for details)
           </span>
           <span className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-secondary">
             <span className="w-3 h-3 rounded-full bg-secondary inline-block" />
-            Deadline / Pay (Opens Website)
+            Deadline / Pay (Click for details)
           </span>
         </div>
       </div>
@@ -291,7 +482,7 @@ export function CalendarView({ month = "september", onNavigate }: CalendarViewPr
                             transition-all duration-150 cursor-pointer active:scale-95 shadow-sm
                             ${EVENT_STYLES[ev.type]}
                           `}
-                          title={`${ev.label} (Click to open)`}
+                          title={`${ev.label} (Click to open details)`}
                         >
                           {EVENT_ICONS[ev.type]} {ev.label}
                         </button>
@@ -307,18 +498,18 @@ export function CalendarView({ month = "september", onNavigate }: CalendarViewPr
         })}
       </div>
 
-      {/* Field Trip Modal Pop-up Bubble */}
-      {selectedTrip && (
+      {/* Dynamic Pop-up Bubble Modal for ALL Events */}
+      {selectedEvent && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
           role="dialog"
           aria-modal="true"
-          aria-label={selectedTrip.title}
+          aria-label={selectedEvent.title}
         >
           <div className="bg-card rounded-3xl shadow-2xl max-w-md w-full p-6 relative border-2 border-accent/30 animate-in zoom-in-95 duration-200">
             {/* Close button */}
             <button
-              onClick={() => setSelectedTrip(null)}
+              onClick={() => setSelectedEvent(null)}
               className="absolute top-4 right-4 w-10 h-10 rounded-full bg-muted hover:bg-muted-foreground/10 flex items-center justify-center font-bold text-foreground text-lg transition-colors border border-border"
               aria-label="Close modal"
             >
@@ -328,13 +519,13 @@ export function CalendarView({ month = "september", onNavigate }: CalendarViewPr
             {/* Content header */}
             <div className="flex gap-4 items-start mb-4 pr-8">
               <div className="w-16 h-16 rounded-2xl bg-accent/15 border-2 border-accent/30 flex items-center justify-center text-4xl flex-shrink-0 shadow-sm">
-                {selectedTrip.icon}
+                {selectedEvent.icon}
               </div>
               <div>
                 <span className="text-[10px] font-black uppercase tracking-widest text-accent bg-accent/10 border border-accent/20 px-2.5 py-1 rounded-full">
-                  Field Trip / Outing
+                  Co-Op Hub Information
                 </span>
-                <h3 className="text-xl font-black text-foreground mt-1.5 leading-snug">{selectedTrip.title}</h3>
+                <h3 className="text-xl font-black text-foreground mt-1.5 leading-snug">{selectedEvent.title}</h3>
               </div>
             </div>
 
@@ -342,61 +533,74 @@ export function CalendarView({ month = "september", onNavigate }: CalendarViewPr
             <div className="bg-muted rounded-2xl p-4 text-xs space-y-2.5 mb-4 border border-border">
               <div className="flex justify-between items-center">
                 <span className="text-muted-foreground font-black uppercase">🗓️ Date</span>
-                <span className="text-foreground font-black">{selectedTrip.date}</span>
+                <span className="text-foreground font-black">{selectedEvent.date}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-muted-foreground font-black uppercase">⏰ Time</span>
-                <span className="text-foreground font-black">{selectedTrip.time}</span>
+                <span className="text-foreground font-black">{selectedEvent.time}</span>
               </div>
               <div className="flex justify-between items-center font-bold">
                 <span className="text-accent font-black uppercase">💰 Cost</span>
                 <span className="text-accent font-black text-sm bg-accent/10 border border-accent/20 px-2.5 py-0.5 rounded-full">
-                  {selectedTrip.cost}
+                  {selectedEvent.cost}
                 </span>
               </div>
               <div className="flex justify-between items-start gap-2 pt-1 border-t border-border/60">
                 <span className="text-muted-foreground font-black uppercase flex-shrink-0">📍 Location</span>
-                <span className="text-foreground font-black text-right">{selectedTrip.location}</span>
+                <span className="text-foreground font-black text-right">{selectedEvent.location}</span>
               </div>
             </div>
 
             {/* Description */}
             <div className="space-y-3 mb-6">
               <div>
-                <h4 className="text-xs font-black text-foreground uppercase tracking-wider">About the Event</h4>
+                <h4 className="text-xs font-black text-foreground uppercase tracking-wider">Details & Activities</h4>
                 <p className="text-xs text-muted-foreground font-semibold mt-1 leading-relaxed">
-                  {selectedTrip.description}
+                  {selectedEvent.description}
                 </p>
               </div>
               <div className="border-t border-border pt-3">
                 <h4 className="text-xs font-black text-foreground uppercase tracking-wider flex items-center gap-1">
-                  🎒 What to Bring
+                  🎒 What to Bring / Prepare
                 </h4>
                 <p className="text-xs text-muted-foreground font-semibold mt-1 leading-relaxed">
-                  {selectedTrip.bring}
+                  {selectedEvent.bring}
                 </p>
               </div>
             </div>
 
             {/* Actions */}
             <div className="flex gap-3">
-              {selectedTrip.cost !== "FREE" && selectedTrip.cost !== "TBA" && (
+              {selectedEvent.actionUrl ? (
                 <a
-                  href="https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD"
+                  href={selectedEvent.actionUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-grow py-3 rounded-2xl bg-secondary text-white font-black text-xs hover:opacity-95 transition-all text-center flex items-center justify-center shadow-md active:scale-98"
                 >
-                  💳 Pay Field Trip Fee
+                  💳 Proceed to Payment Link
                 </a>
+              ) : (
+                selectedEvent.title.toLowerCase().includes("kendall") || selectedEvent.title.toLowerCase().includes("westchester") ? (
+                  <button
+                    onClick={() => {
+                      setSelectedEvent(null)
+                      if (onNavigate) {
+                        const isKendall = selectedEvent.title.toLowerCase().includes("kendall")
+                        onNavigate(isKendall ? "kendall" : "westchester")
+                      }
+                    }}
+                    className="flex-grow py-3 rounded-2xl bg-primary text-white font-black text-xs hover:opacity-95 transition-all text-center shadow-md active:scale-98"
+                  >
+                    📖 View Campus Curriculum
+                  </button>
+                ) : null
               )}
               <button
-                onClick={() => setSelectedTrip(null)}
-                className={`py-3 rounded-2xl font-black text-xs hover:bg-muted-foreground/10 transition-colors border border-border text-center flex-grow ${
-                  selectedTrip.cost === "FREE" || selectedTrip.cost === "TBA" ? "bg-accent text-white hover:opacity-95 border-none" : "bg-card text-foreground"
-                }`}
+                onClick={() => setSelectedEvent(null)}
+                className={`py-3 rounded-2xl font-black text-xs hover:bg-muted-foreground/10 transition-colors border border-border text-center flex-grow bg-card text-foreground`}
               >
-                {selectedTrip.cost === "FREE" ? "Can't Wait! 🎉" : selectedTrip.cost === "TBA" ? "OK, Cool! 👍" : "Close"}
+                Close
               </button>
             </div>
           </div>
