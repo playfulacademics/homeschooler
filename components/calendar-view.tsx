@@ -23,7 +23,7 @@ interface FieldTripDetails {
   icon: string
 }
 
-const EVENTS: CalendarEvent[] = [
+const SEPTEMBER_EVENTS: CalendarEvent[] = [
   // Kendall Co-Ops (Tuesdays)
   { day: 1, type: "coop", label: "Kendall: Get to Know Me" },
   { day: 8, type: "coop", label: "Kendall: The Community" },
@@ -45,8 +45,29 @@ const EVENTS: CalendarEvent[] = [
   { day: 25, type: "fieldtrip", label: "Top Golf Field Trip (12:15pm)" },
 ]
 
-const FIELD_TRIPS: Record<number, FieldTripDetails> = {
-  11: {
+const OCTOBER_EVENTS: CalendarEvent[] = [
+  // Kendall Co-Ops (Tuesdays)
+  { day: 6, type: "coop", label: "Kendall Co-Op Session" },
+  { day: 13, type: "coop", label: "Kendall Co-Op Session" },
+  { day: 20, type: "coop", label: "Kendall Co-Op Session" },
+  { day: 27, type: "coop", label: "Kendall Co-Op Session" },
+
+  // Westchester Co-Ops (Thursdays)
+  { day: 1, type: "coop", label: "Westchester Co-Op Session" },
+  { day: 8, type: "coop", label: "Westchester Co-Op Session" },
+  { day: 15, type: "coop", label: "Westchester Co-Op Session" },
+  { day: 22, type: "coop", label: "Westchester Co-Op Session" },
+  { day: 29, type: "coop", label: "Westchester Co-Op Session" },
+
+  // Special Events & Due Dates
+  { day: 15, type: "tuition", label: "November Tuition Due" },
+  { day: 16, type: "fieldtrip", label: "October Fall Outing (TBA)" },
+  { day: 30, type: "fieldtrip", label: "Halloween Costume Parade" },
+]
+
+const FIELD_TRIPS: Record<string, FieldTripDetails> = {
+  // September Field Trips
+  "september-11": {
     title: "Salvatore Park Play Date Picnic",
     date: "Friday, September 11, 2026",
     time: "11:00 AM",
@@ -56,7 +77,7 @@ const FIELD_TRIPS: Record<number, FieldTripDetails> = {
     bring: "Picnic blanket, lunch/snacks, water bottles, and sunscreen.",
     icon: "🧺",
   },
-  16: {
+  "september-16": {
     title: "DIY Squishy Party",
     date: "Wednesday, September 16, 2026",
     time: "11:30 AM",
@@ -66,7 +87,7 @@ const FIELD_TRIPS: Record<number, FieldTripDetails> = {
     bring: "Wear messy-friendly clothes (acrylic paints will be used) and a creative spirit!",
     icon: "🧸",
   },
-  25: {
+  "september-25": {
     title: "Field Trip Friday: Top Golf Doral",
     date: "Friday, September 25, 2026",
     time: "12:15 PM",
@@ -76,7 +97,7 @@ const FIELD_TRIPS: Record<number, FieldTripDetails> = {
     bring: "Comfortable active wear, sneakers, and sports water bottle.",
     icon: "⛳",
   },
-  29: {
+  "september-29": {
     title: "Miami & Homestead Homeschoolers Merge Day",
     date: "Tuesday, September 29, 2026",
     time: "12:00 PM",
@@ -85,6 +106,28 @@ const FIELD_TRIPS: Record<number, FieldTripDetails> = {
     description: "Our co op will be merging with the Miami & Homestead Homeschoolers group to socialize, do a scavenger hunt, and enjoy a good time together! It's a wonderful opportunity to build wider community connections, make new friends, and share resources.",
     bring: "Comfortable running shoes for the scavenger hunt, water bottles, snacks, and a big smile!",
     icon: "🤝",
+  },
+
+  // October Field Trips
+  "october-16": {
+    title: "October Fall Outing (TBA)",
+    date: "Friday, October 16, 2026",
+    time: "11:00 AM",
+    cost: "TBA",
+    location: "To Be Announced",
+    description: "An upcoming interactive fall field trip! Details will be finalized and announced in our WhatsApp group chat soon. Stay tuned!",
+    bring: "Water bottle and comfortable shoes.",
+    icon: "🍂",
+  },
+  "october-30": {
+    title: "Halloween Costume Parade",
+    date: "Friday, October 30, 2026",
+    time: "11:30 AM",
+    cost: "FREE",
+    location: "Co-Op Ground / Park",
+    description: "Show off your favorite costumes and share treats! We will have a fun costume parade, music, and healthy treats for the kids. Friendly and non-scary costumes only please.",
+    bring: "A friendly costume, treat bags, and healthy snacks to share!",
+    icon: "🎃",
   },
 }
 
@@ -101,16 +144,18 @@ const EVENT_ICONS: Record<EventType, string> = {
 }
 
 interface CalendarViewProps {
-  onNavigate?: (view: "calendar" | "kendall" | "westchester") => void
+  month?: "september" | "october"
+  onNavigate?: (view: "calendar" | "october" | "kendall" | "westchester") => void
 }
 
-export function CalendarView({ onNavigate }: CalendarViewProps) {
+export function CalendarView({ month = "september", onNavigate }: CalendarViewProps) {
   const [selectedTrip, setSelectedTrip] = useState<FieldTripDetails | null>(null)
 
-  // September 2026: starts on Tuesday (day index 2)
-  const monthName = "September 2026"
-  const startDayIndex = 2  // Tuesday
-  const totalDays = 30
+  const isSeptember = month === "september"
+  const monthName = isSeptember ? "September 2026" : "October 2026"
+  const startDayIndex = isSeptember ? 2 : 4  // Sept: Tue (2), Oct: Thu (4)
+  const totalDays = isSeptember ? 30 : 31
+  const eventsList = isSeptember ? SEPTEMBER_EVENTS : OCTOBER_EVENTS
 
   const cells: (number | null)[] = [
     ...Array(startDayIndex).fill(null),
@@ -121,16 +166,16 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
   while (cells.length % 7 !== 0) cells.push(null)
 
   const getEventsForDay = (day: number) =>
-    EVENTS.filter((e) => e.day === day)
+    eventsList.filter((e) => e.day === day)
 
   const handleEventClick = (ev: CalendarEvent) => {
     if (ev.type === "fieldtrip") {
-      const trip = FIELD_TRIPS[ev.day]
+      const trip = FIELD_TRIPS[`${month}-${ev.day}`]
       if (trip) {
         setSelectedTrip(trip)
       }
-    } else {
-      if (ev.type === "coop" && onNavigate) {
+    } else if (onNavigate) {
+      if (ev.type === "coop") {
         const isKendall = ev.label.toLowerCase().includes("kendall")
         onNavigate(isKendall ? "kendall" : "westchester")
       } else if (ev.type === "tuition" || ev.label.toLowerCase().includes("funds due")) {
@@ -179,8 +224,9 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
       <div className="grid grid-cols-7 gap-1.5">
         {cells.map((day, idx) => {
           const events = day ? getEventsForDay(day) : []
+          const activeMonthIndex = isSeptember ? 8 : 9 // September is index 8, October is index 9
           const isToday = day === new Date().getDate() &&
-            new Date().getMonth() === 8 && new Date().getFullYear() === 2026
+            new Date().getMonth() === activeMonthIndex && new Date().getFullYear() === 2026
           return (
             <div
               key={idx}
@@ -302,7 +348,7 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
 
             {/* Actions */}
             <div className="flex gap-3">
-              {selectedTrip.cost !== "FREE" && (
+              {selectedTrip.cost !== "FREE" && selectedTrip.cost !== "TBA" && (
                 <a
                   href="https://www.playfulacademics.com/product/co-op-monthly-fee/YLTMXKQUGHIHFYPCJKNHU7VD"
                   target="_blank"
@@ -314,11 +360,11 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
               )}
               <button
                 onClick={() => setSelectedTrip(null)}
-                className={`py-3 rounded-2xl font-black text-xs hover:bg-muted-foreground/10 transition-colors border border-border text-center ${
-                  selectedTrip.cost === "FREE" ? "bg-accent text-white hover:opacity-95 border-none flex-grow" : "px-6 bg-card text-foreground"
+                className={`py-3 rounded-2xl font-black text-xs hover:bg-muted-foreground/10 transition-colors border border-border text-center flex-grow ${
+                  selectedTrip.cost === "FREE" || selectedTrip.cost === "TBA" ? "bg-accent text-white hover:opacity-95 border-none" : "bg-card text-foreground"
                 }`}
               >
-                {selectedTrip.cost === "FREE" ? "Can't Wait! 🎉" : "Close"}
+                {selectedTrip.cost === "FREE" ? "Can't Wait! 🎉" : selectedTrip.cost === "TBA" ? "OK, Cool! 👍" : "Close"}
               </button>
             </div>
           </div>
@@ -331,9 +377,19 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
           <div className="text-2xl mb-2">🏫</div>
           <h3 className="font-black text-primary text-sm">Weekly Co-Ops</h3>
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed font-semibold">
-            <strong>Kendall Campus:</strong> Meets Tuesdays (1st, 8th, 15th, 22nd, 29th). Sept 29th is our exciting Miami & Homestead Merge Day!
-            <br />
-            <strong className="mt-1 inline-block">Westchester Campus:</strong> Meets Thursdays (3rd, 10th, 17th, 24th) exploring "All About Me & My Body".
+            {isSeptember ? (
+              <>
+                <strong>Kendall Campus:</strong> Meets Tuesdays (1st, 8th, 15th, 22nd, 29th). Sept 29th is our exciting Miami & Homestead Merge Day!
+                <br />
+                <strong className="mt-1 inline-block">Westchester Campus:</strong> Meets Thursdays (3rd, 10th, 17th, 24th) exploring "All About Me & My Body".
+              </>
+            ) : (
+              <>
+                <strong>Kendall Campus:</strong> Meets Tuesdays (6th, 13th, 20th, 27th) continuing our Co-Op studies.
+                <br />
+                <strong className="mt-1 inline-block">Westchester Campus:</strong> Meets Thursdays (1st, 8th, 15th, 22nd, 29th) continuing our Co-Op studies.
+              </>
+            )}
             <br />
             <span className="text-[10px] text-primary/80 font-bold block mt-1">💡 Click any Co-Op badge on the calendar to open its study details!</span>
           </p>
@@ -342,11 +398,21 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
           <div className="text-2xl mb-2">⛳</div>
           <h3 className="font-black text-accent text-sm">Field Trips & Gatherings</h3>
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed font-semibold">
-            <strong>Sept 11 (11am):</strong> Salvatore Park Play Date Picnic!
-            <br />
-            <strong>Sept 16 (11:30am):</strong> DIY Squishy Party ($10/child) at Larry & Penny Park.
-            <br />
-            <strong>Sept 25 (12:15pm):</strong> Field Trip to Top Golf in Doral ($10/person).
+            {isSeptember ? (
+              <>
+                <strong>Sept 11 (11am):</strong> Salvatore Park Play Date Picnic!
+                <br />
+                <strong>Sept 16 (11:30am):</strong> DIY Squishy Party ($10/child) at Larry & Penny Park.
+                <br />
+                <strong>Sept 25 (12:15pm):</strong> Field Trip to Top Golf in Doral ($10/person).
+              </>
+            ) : (
+              <>
+                <strong>Oct 16 (11:00am):</strong> Fall Co-Op Outing (Details TBA).
+                <br />
+                <strong>Oct 30 (11:30am):</strong> Halloween Costume Parade! 🎃
+              </>
+            )}
             <br />
             <span className="text-[10px] text-accent/80 font-bold block mt-1">💡 Click any Field Trip badge on the calendar to see full details!</span>
           </p>
@@ -355,9 +421,17 @@ export function CalendarView({ onNavigate }: CalendarViewProps) {
           <div className="text-2xl mb-2">⏰</div>
           <h3 className="font-black text-secondary text-sm">Payments & Deadlines</h3>
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed font-semibold">
-            <strong>Sept 7th:</strong> Field Trip funds ($10) are due to confirm booking.
-            <br />
-            <strong>Sept 15th:</strong> October Co-Op Tuition due ($125). Click to open the main site to make payments.
+            {isSeptember ? (
+              <>
+                <strong>Sept 7th:</strong> Field Trip funds ($10) are due to confirm booking.
+                <br />
+                <strong>Sept 15th:</strong> October Co-Op Tuition due ($125). Click to open the main site to make payments.
+              </>
+            ) : (
+              <>
+                <strong>Oct 15th:</strong> November Co-Op Tuition due ($125). Click any deadline card to pay on our website.
+              </>
+            )}
             <br />
             <span className="text-[10px] text-secondary/80 font-bold block mt-1">💡 Click any deadline badge on the calendar to open our website!</span>
           </p>
