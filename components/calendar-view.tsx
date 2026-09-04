@@ -47,8 +47,8 @@ const SEPTEMBER_EVENTS: CalendarEvent[] = [
 
 const OCTOBER_EVENTS: CalendarEvent[] = [
   // Kendall Co-Ops (Tuesdays)
-  { day: 6, type: "coop", label: "Kendall: Perception" },
-  { day: 13, type: "coop", label: "Kendall: STEM Electrical" },
+  { day: 6, type: "coop", label: "Kendall: Perception & PE" },
+  { day: 13, type: "coop", label: "Kendall: STEM & California" },
   { day: 20, type: "coop", label: "Kendall: Business Study" },
   { day: 27, type: "coop", label: "Kendall: Gacavi Farm Day" },
 
