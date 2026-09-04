@@ -21,6 +21,14 @@ export function DashboardFooter() {
           </a>
           <span className="hidden sm:inline text-border">|</span>
           <a
+            href="/playful_academics_fall_2026_calendars.pdf"
+            download
+            className="text-primary hover:text-primary/80 transition-colors underline underline-offset-2"
+          >
+            🖨️ Printable PDF Calendar
+          </a>
+          <span className="hidden sm:inline text-border">|</span>
+          <a
             href="https://wa.me/"
             target="_blank"
             rel="noopener noreferrer"
