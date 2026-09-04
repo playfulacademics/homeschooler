@@ -47,21 +47,23 @@ const SEPTEMBER_EVENTS: CalendarEvent[] = [
 
 const OCTOBER_EVENTS: CalendarEvent[] = [
   // Kendall Co-Ops (Tuesdays)
-  { day: 6, type: "coop", label: "Kendall Co-Op Session" },
-  { day: 13, type: "coop", label: "Kendall Co-Op Session" },
-  { day: 20, type: "coop", label: "Kendall Co-Op Session" },
-  { day: 27, type: "coop", label: "Kendall Co-Op Session" },
+  { day: 6, type: "coop", label: "Kendall: Perception" },
+  { day: 13, type: "coop", label: "Kendall: STEM Electrical" },
+  { day: 20, type: "coop", label: "Kendall: Business Study" },
+  { day: 27, type: "coop", label: "Kendall: Gacavi Farm Day" },
 
   // Westchester Co-Ops (Thursdays)
-  { day: 1, type: "coop", label: "Westchester Co-Op Session" },
-  { day: 8, type: "coop", label: "Westchester Co-Op Session" },
-  { day: 15, type: "coop", label: "Westchester Co-Op Session" },
-  { day: 22, type: "coop", label: "Westchester Co-Op Session" },
-  { day: 29, type: "coop", label: "Westchester Co-Op Session" },
+  { day: 1, type: "coop", label: "Westchester: Helpers Intro" },
+  { day: 8, type: "fieldtrip", label: "Fire Station Tour (12pm)" },
+  { day: 15, type: "coop", label: "Westchester: Doctor Day" },
+  { day: 22, type: "coop", label: "Westchester: Farm Day" },
+  { day: 29, type: "fieldtrip", label: "Westchester: Toy Story Day" },
 
   // Special Events & Due Dates
+  { day: 10, type: "tuition", label: "All Field Trip Funds Due" },
+  { day: 14, type: "fieldtrip", label: "Sprouts Field Trip (12pm)" },
   { day: 15, type: "tuition", label: "November Tuition Due" },
-  { day: 16, type: "fieldtrip", label: "October Fall Outing (TBA)" },
+  { day: 16, type: "fieldtrip", label: "Grounded Hacienda Trip" },
   { day: 30, type: "fieldtrip", label: "Halloween Costume Parade" },
 ]
 
@@ -109,15 +111,45 @@ const FIELD_TRIPS: Record<string, FieldTripDetails> = {
   },
 
   // October Field Trips
+  "october-8": {
+    title: "Fire Fighters & Fire Station Tour",
+    date: "Thursday, October 8, 2026",
+    time: "12:00 PM",
+    cost: "FREE",
+    location: "Local Doral Fire Station",
+    description: "Sound the sirens! Westchester co-op kids are touring the fire station, meeting local firefighter heroes, learning essential fire safety, and exploring a real-life fire truck!",
+    bring: "Co-Op Workbook and your favorite firefighter question!",
+    icon: "👨‍🚒",
+  },
+  "october-14": {
+    title: "Sprouts Field Trip in Kendall",
+    date: "Wednesday, October 14, 2026",
+    time: "12:00 PM",
+    cost: "FREE",
+    location: "Sprouts Farmers Market (Kendall)",
+    description: "An interactive educational grocery tour! Kids learn about healthy nutrition, explore organic produce, and participate in a fun grocery scavenger hunt. ⚠️ STRICTLY limited to 12 kids total! Sibling RSVPs are required.",
+    bring: "Comfortable sneakers and a hungry tummy for healthy samples!",
+    icon: "🌱",
+  },
   "october-16": {
-    title: "October Fall Outing (TBA)",
+    title: "Field Trip: Grounded Hacienda",
     date: "Friday, October 16, 2026",
-    time: "11:00 AM",
-    cost: "TBA",
-    location: "To Be Announced",
-    description: "An upcoming interactive fall field trip! Details will be finalized and announced in our WhatsApp group chat soon. Stay tuned!",
-    bring: "Water bottle and comfortable shoes.",
-    icon: "🍂",
+    time: "11:00 AM (Check-in)",
+    cost: "$25 per child",
+    location: "Grounded Hacienda",
+    description: "Escape to the beautiful Grounded Hacienda! Explore nature trails, pet farm animals, and enjoy a gorgeous outdoor group class with co-op friends. A beautiful experiential farm day.",
+    bring: "Wear long pants, closed-toe sneakers/boots, sunscreen, water bottle, and a sack lunch.",
+    icon: "🏡",
+  },
+  "october-29": {
+    title: "Westchester: Toy Story Day",
+    date: "Thursday, October 29, 2026",
+    time: "All Day during Co-Op",
+    cost: "Free for members / $35 non-members",
+    location: "Westchester Co-Op Campus",
+    description: "To infinity and beyond! A special themed, play-based free day celebrating Toy Story. Westchester Co-Op members attend for free. Sibling or non-co-op guests are welcome for a guest fee of $35.",
+    bring: "Bring your favorite Toy Story toy (labeled with your name) and wear a themed outfit or costume!",
+    icon: "🤠",
   },
   "october-30": {
     title: "Halloween Costume Parade",
@@ -408,9 +440,11 @@ export function CalendarView({ month = "september", onNavigate }: CalendarViewPr
               </>
             ) : (
               <>
-                <strong>Oct 16 (11:00am):</strong> Fall Co-Op Outing (Details TBA).
+                <strong>Oct 14 (12:00pm):</strong> Sprouts Field Trip ($10 Co-Op Fee, Max 12 Kids).
                 <br />
-                <strong>Oct 30 (11:30am):</strong> Halloween Costume Parade! 🎃
+                <strong>Oct 16 (11:00am):</strong> Grounded Hacienda Farm Outing ($25/child).
+                <br />
+                <strong>Oct 29 (All Day):</strong> Westchester Toy Story Day! 🤠
               </>
             )}
             <br />
@@ -429,6 +463,8 @@ export function CalendarView({ month = "september", onNavigate }: CalendarViewPr
               </>
             ) : (
               <>
+                <strong>Oct 10th:</strong> All October Field Trip Funds are strictly due!
+                <br />
                 <strong>Oct 15th:</strong> November Co-Op Tuition due ($125). Click any deadline card to pay on our website.
               </>
             )}
