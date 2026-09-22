@@ -8,48 +8,58 @@ interface WeekData {
   icon: string
   color: string
   funFact: string
+  date?: string
+  supplies?: string[]
 }
 
 const KENDALL_WEEKS: WeekData[] = [
   {
     week: 1,
-    topic: "Get to Know Me",
-    activity: "First Day of Co-Op: Super Hero Me & Time Capsule",
+    date: "October 6th",
+    topic: "Perception",
+    activity: "Yarn Art (Fiber Art Project)",
     description:
-      "Welcome to Co-Op! Today we create our Super Hero identities and pack our Time Capsules. We'll also study our Artist of the Month, Frida Kahlo, and paint self-portraits.",
-    icon: "🦸‍♀️",
+      "Because learning is about more than memorizing facts. It's about teaching children how to think. In October, our students will explore perception through hands-on activities, optical illusions, art, and thought-provoking challenges that encourage them to look beyond what they see at first glance.",
+    icon: "👁️",
     color: "primary",
-    funFact: "Artist Spotlight: Frida Kahlo is famous for her colorful self-portraits. She painted her own reality!",
+    funFact: "Fun Fact: Victoria's artwork has been featured in the Academy Awards campaign and galleries around the world!",
+    supplies: ["8 x 10 inch piece of cardboard", "Pencil"],
   },
   {
     week: 2,
-    topic: "The Community",
-    activity: "City Building & Synergy (Inspired by 'Elemental')",
+    date: "October 13th",
+    topic: "Geography: The California Gold Rush",
+    activity: "PE with Coach Jose",
     description:
-      "Explore community dynamics through Project-Based Learning (PBL) with 'Elemental'. Together we'll build a cooperative cardboard city, practicing true synergy, and craft Frida's 'La Casa Azul' (Blue House).",
-    icon: "🏢",
+      "Through this unit, children will explore how geography influences where people live, how natural resources can shape communities, and how opportunity can inspire people to take risks and pursue their dreams.",
+    icon: "🗺️",
     color: "accent",
-    funFact: "Synergy Power: Synergy means the whole is greater than the sum of its parts—we achieve more together!",
+    funFact: "Fun Fact: The Gold Rush transformed California — over 300,000 people rushed west to find their dreams!",
+    supplies: ["Binder and US Geography books", "A cleaning brush — a toothbrush, fruit brush, or nail brush"],
   },
   {
     week: 3,
-    topic: "Entrepreneurship Week",
-    activity: "Starting My Business: Logo, Name & Idea",
+    date: "October 20th",
+    topic: "Entrepreneurial Study & Electrical Currents",
+    activity: "Art Project: Yarn Turtle",
     description:
-      "Time to build! Brainstorm your business ideas, choose a trade name, and design your first logo. Mindful PE today is packed with coordination brain games and high-energy movement.",
+      "This week in entrepreneurship, we are learning the cost of how to structure our businesses — what it really takes (in money, time, and materials) to build something of our own. Children connect math, planning, and creativity as they think like real founders. Our STEM exploration this week is all about electricity! Students build and test real circuits — and discover the invisible force that powers their world.",
     icon: "💼",
     color: "secondary",
-    funFact: "Brain Fact: Cross-lateral movements (like brain games) help activate both sides of your brain!",
+    funFact: "Art Focus: A hands-on fiber-art project! Children wrap, weave, and wind yarn to create their own turtle friend — building fine motor strength and patience along the way.",
+    supplies: ["Money investment book", "Binder (please bring both to co-op)"],
   },
   {
     week: 4,
-    topic: "Geography",
-    activity: "Florida Travelers Poster, Everglades & Squeezed OJ",
+    date: "October 27th",
+    topic: "Quality Enrichment Day — Farm Day!",
+    activity: "Gacavi Farm Ranch Day & Picnic",
     description:
-      "Journey through Florida and the Everglades! Bring your workbooks and textbooks to design a travel poster. For Practical Life Skills (PLS), we will squeeze fresh Florida orange juice and share Cuban bread.",
-    icon: "🐊",
+      "A full immersion quality enrichment day at the farm/ranch! We'll spend the day enjoying the outdoors and a picnic lunch together under the large gazebo. All supplies will be provided — no co-op supply box needed today. Just boots and lunch!",
+    icon: "🌾",
     color: "success",
-    funFact: "Everglades Wonder: The Florida Everglades is a slow-moving river of grass, and the only place on Earth where alligators and crocodiles coexist!",
+    funFact: "What to Wear: Old clothes or clothes you don't mind getting dirty — we'll be out on the ranch. Cowboy boots, farm boots, rain boots, or comfy sneakers are all great! (No crocs, sandals, or open-toed shoes)",
+    supplies: ["Pack a lunch (we picnic under the gazebo)", "Boots (cowboy, farm, rain, or comfy sneakers) — No crocs, sandals, or open-toed shoes"],
   },
 ]
 
@@ -134,6 +144,20 @@ const COLOR_MAP: Record<string, { bg: string; border: string; text: string; badg
   },
 }
 
+const KENDALL_FIELD_TRIPS = [
+  { icon: "🚒", name: "Fire Station", date: "October 8th @ 12:00 PM" },
+  { icon: "🌱", name: "Sprouts Market", date: "October 14th @ 12:00 PM" },
+  { icon: "🏡", name: "Grounded Hacienda", date: "October 16th @ 11:30 AM" },
+  { icon: "🎾", name: "PE Enrichment: Tennis", date: "Date TBA" },
+]
+
+const KENDALL_MONTH_AT_A_GLANCE = [
+  { week: "Week 1", focus: "Perception & Art" },
+  { week: "Week 2", focus: "The California Gold Rush & PE" },
+  { week: "Week 3", focus: "Entrepreneurial Studies, Electrical Currents & Art" },
+  { week: "Week 4", focus: "Farm Day" },
+]
+
 interface UnitStudyViewProps {
   location?: "kendall" | "westchester"
 }
@@ -153,23 +177,23 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
       {/* Unit header */}
       <div className={`rounded-2xl bg-gradient-to-r ${headerGradient} border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-4`}>
         <div className="text-5xl" role="img" aria-label="unit-icon">
-          {isKendall ? "🦸‍♀️" : "🎨"}
+          {isKendall ? "🍂" : "🎨"}
         </div>
         <div>
           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">
-            {isKendall ? "Kendall Co Op Study" : "Westchester Co Op Study"}
+            {isKendall ? "Kendall Leadership Co Op" : "Westchester Co Op"}
           </div>
           <h2 className={`text-2xl font-black ${titleColor}`}>
-            {isKendall ? "My Community & Me" : "All About Me & My Body"}
+            {isKendall ? "October — Welcome to Fall!" : "All About Me & My Body"}
           </h2>
           {isKendall && (
             <div className="inline-flex items-center gap-1.5 bg-primary/10 border border-primary/25 rounded-full px-2.5 py-0.5 text-xs font-black text-primary mt-1.5">
-              🎨 Artist of the Month: Frida Kahlo
+              🎨 Artist of the Month: Victoria Villasana
             </div>
           )}
           <p className="text-sm text-muted-foreground font-semibold mt-1.5">
             {isKendall
-              ? "4-week hands-on journey discovering identity, collaborative community synergy, starting a business, and Florida geography!"
+              ? "4-week hands-on October journey exploring perception, California geography, entrepreneurship & electrical currents — ending with a Farm Day enrichment!"
               : "4-week multi-sensory adventure exploring self-identity, the 5 senses, skeletal/lung systems, germs, and practical life skills!"}
           </p>
         </div>
@@ -190,9 +214,24 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
               />
             ))}
           </div>
-          <span className="text-xs text-muted-foreground font-semibold">Week 2 in progress</span>
+          <span className="text-xs text-muted-foreground font-semibold">Week 1 in progress</span>
         </div>
       </div>
+
+      {/* Field Trips quick strip (Kendall only) */}
+      {isKendall && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {KENDALL_FIELD_TRIPS.map((trip) => (
+            <div key={trip.name} className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-3 flex items-center gap-2.5">
+              <span className="text-2xl">{trip.icon}</span>
+              <div className="min-w-0">
+                <div className="text-xs font-black text-accent leading-tight">{trip.name}</div>
+                <div className="text-[10px] font-bold text-muted-foreground">{trip.date}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Week cards */}
       <div className="grid sm:grid-cols-2 gap-4">
@@ -218,9 +257,9 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
                     <span
                       className={`text-xs font-black px-2.5 py-1 rounded-full ${c.badge} ${c.badgeText}`}
                     >
-                      Week {week.week}
+                      Week {week.week}{week.date ? ` — ${week.date}` : ""}
                     </span>
-                    {week.week === 2 && (
+                    {week.week === 1 && (
                       <span className="text-xs font-black px-2.5 py-1 rounded-full bg-foreground text-background">
                         NOW
                       </span>
@@ -235,52 +274,60 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
               <p className="text-sm text-foreground/80 font-semibold leading-relaxed mb-3">
                 {week.description}
               </p>
-              <div className={`rounded-xl ${c.bg} border ${c.border} p-2.5`}>
+              <div className={`rounded-xl ${c.bg} border ${c.border} p-2.5 mb-3`}>
                 <p className={`text-xs font-bold ${c.text} leading-snug`}>
                   🌟 {week.funFact}
                 </p>
               </div>
+              {week.supplies && (
+                <div className="rounded-xl bg-muted border border-border p-2.5">
+                  <p className="text-[10px] font-black text-foreground uppercase tracking-wider mb-1">
+                    🎒 Supplies Needed
+                  </p>
+                  {week.supplies.map((s) => (
+                    <p key={s} className="text-xs text-muted-foreground font-semibold flex gap-1.5">
+                      <span className="text-foreground">•</span> {s}
+                    </p>
+                  ))}
+                </div>
+              )}
             </div>
           )
         })}
       </div>
 
-      {/* Supplies / Action reminder */}
-      <div className="rounded-2xl bg-muted border border-border p-5 space-y-4">
-        <div className="flex gap-3 items-center">
-          <span className="text-3xl">🎒</span>
-          <div>
-            <h4 className="font-black text-base text-foreground">
-              {isKendall ? "Supplies for the Month" : "Supplies Needed for the Month"}
-            </h4>
-            <p className="text-xs text-muted-foreground font-bold mt-0.5">
-              {isKendall 
-                ? "⚠️ Note: Your Co-Op Workbook is needed each week!"
-                : "⚠️ Note: Coordinate weekly supplies for Westchester group!"}
-            </p>
+      {/* Bottom Box: Month at a glance (Kendall) / Supplies reminder (Westchester) */}
+      {isKendall ? (
+        <div className="rounded-2xl border-2 border-secondary/30 bg-secondary/5 p-5 space-y-4">
+          <div className="flex gap-3 items-center">
+            <span className="text-3xl">🗓️</span>
+            <div>
+              <h4 className="font-black text-base text-foreground">Month at a Glance</h4>
+              <p className="text-xs text-muted-foreground font-bold mt-0.5">
+                ⚠️ Field trip funds for Grounded Hacienda are due October 1st. Pay via Cash, Zelle, Apple Pay, or through Step Up using our FLEX option!
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 text-xs">
+            {KENDALL_MONTH_AT_A_GLANCE.map((m) => (
+              <div key={m.week} className="bg-card border border-border rounded-xl p-3 space-y-1">
+                <span className="font-black text-secondary">{m.week}:</span>
+                <p className="text-muted-foreground font-semibold">{m.focus}</p>
+              </div>
+            ))}
           </div>
         </div>
-        
-        {isKendall ? (
-          <div className="grid gap-3 sm:grid-cols-2 text-xs">
-            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-              <span className="font-black text-primary">Week 1 Supplies:</span>
-              <p className="text-muted-foreground font-semibold">Scissors, pencil, glue, tray, oil pastels</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-              <span className="font-black text-accent">Week 2 Supplies:</span>
-              <p className="text-muted-foreground font-semibold">Medium to large cardboard box, 2 empty paper towel or toilet paper rolls, wood glue or glue gun</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-              <span className="font-black text-secondary">Week 3 Supplies:</span>
-              <p className="text-muted-foreground font-semibold">Investment Activity Book</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-              <span className="font-black text-success">Week 4 Supplies:</span>
-              <p className="text-muted-foreground font-semibold">Passport America Book, large poster board, hand-held juicer, all-purpose glue or glue gun</p>
+      ) : (
+        <div className="rounded-2xl bg-muted border border-border p-5 space-y-4">
+          <div className="flex gap-3 items-center">
+            <span className="text-3xl">🎒</span>
+            <div>
+              <h4 className="font-black text-base text-foreground">Supplies Needed for the Month</h4>
+              <p className="text-xs text-muted-foreground font-bold mt-0.5">
+                ⚠️ Note: Coordinate weekly supplies for Westchester group!
+              </p>
             </div>
           </div>
-        ) : (
           <div className="grid gap-3 sm:grid-cols-2 text-xs">
             <div className="bg-card border border-border rounded-xl p-3 space-y-1">
               <span className="font-black text-indigo-500">Week 1 Supplies:</span>
@@ -301,8 +348,8 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
               </p>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
