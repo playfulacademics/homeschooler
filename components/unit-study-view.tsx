@@ -267,7 +267,7 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
                   </div>
                   <h3 className={`font-black text-base leading-tight ${c.text}`}>{week.topic}</h3>
                   <p className="text-xs font-bold text-muted-foreground mt-0.5">
-                    🎨 Activity: {week.activity}
+                    Additional Activity: {week.activity}
                   </p>
                 </div>
               </div>
