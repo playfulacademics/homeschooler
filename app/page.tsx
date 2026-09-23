@@ -8,28 +8,25 @@ import { UnitStudyView } from "@/components/unit-study-view"
 import { DashboardFooter } from "@/components/dashboard-footer"
 
 const VIEW_LABELS: Record<ActiveView, string> = {
-  calendar: "September Calendar",
   october: "October Calendar",
   kendall: "Kendall Co-Op Unit Study",
   westchester: "Westchester Co-Op Unit Study",
 }
 
 const VIEW_BORDER: Record<ActiveView, string> = {
-  calendar: "border-accent/30",
   october: "border-orange-500/30",
   kendall: "border-primary/30",
   westchester: "border-indigo-500/30",
 }
 
 const VIEW_HEADER_BG: Record<ActiveView, string> = {
-  calendar: "from-accent/10 to-transparent",
   october: "from-orange-500/10 to-transparent",
   kendall: "from-primary/10 to-transparent",
   westchester: "from-indigo-500/10 to-transparent",
 }
 
 export default function Home() {
-  const [activeView, setActiveView] = useState<ActiveView>("calendar")
+  const [activeView, setActiveView] = useState<ActiveView>("october")
 
   return (
     <main className="min-h-screen bg-background">
@@ -59,7 +56,6 @@ export default function Home() {
               key={activeView}
               className="animate-in fade-in slide-in-from-bottom-3 duration-300"
             >
-              {activeView === "calendar" && <CalendarView month="september" onNavigate={setActiveView} />}
               {activeView === "october" && <CalendarView month="october" onNavigate={setActiveView} />}
               {activeView === "kendall" && <UnitStudyView location="kendall" />}
               {activeView === "westchester" && <UnitStudyView location="westchester" />}

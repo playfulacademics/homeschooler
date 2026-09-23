@@ -363,7 +363,7 @@ const EVENT_ICONS: Record<EventType, string> = {
 
 interface CalendarViewProps {
   month?: "september" | "october"
-  onNavigate?: (view: "calendar" | "october" | "kendall" | "westchester") => void
+  onNavigate?: (view: "october" | "kendall" | "westchester") => void
 }
 
 export function CalendarView({ month = "september", onNavigate }: CalendarViewProps) {

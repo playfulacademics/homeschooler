@@ -1,6 +1,6 @@
 "use client"
 
-export type ActiveView = "calendar" | "october" | "kendall" | "westchester"
+export type ActiveView = "october" | "kendall" | "westchester"
 
 interface NavButtonsProps {
   active: ActiveView
@@ -8,14 +8,6 @@ interface NavButtonsProps {
 }
 
 const BUTTONS: { id: ActiveView; label: string; icon: string; color: string; activeColor: string; ring: string }[] = [
-  {
-    id: "calendar",
-    label: "September Calendar",
-    icon: "📅",
-    color: "bg-accent/10 text-accent border-accent/30 hover:bg-accent/20",
-    activeColor: "bg-accent text-white border-accent shadow-lg shadow-accent/30",
-    ring: "ring-accent/40",
-  },
   {
     id: "october",
     label: "October Calendar",
@@ -45,7 +37,7 @@ const BUTTONS: { id: ActiveView; label: string; icon: string; color: string; act
 export function NavButtons({ active, onSelect }: NavButtonsProps) {
   return (
     <nav aria-label="Dashboard navigation">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {BUTTONS.map((btn) => {
           const isActive = active === btn.id
           return (
