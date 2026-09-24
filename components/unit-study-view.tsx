@@ -66,43 +66,51 @@ const KENDALL_WEEKS: WeekData[] = [
 const WESTCHESTER_WEEKS: WeekData[] = [
   {
     week: 1,
-    topic: "About Me",
-    activity: "First Week of Co-Op: Time Capsules & School Sensory Bin Ipsy",
+    date: "October 1st",
+    topic: "Introduction to Community Helpers",
+    activity: "Role-Play, Movement Games & Mini Challenges",
     description:
-      "Welcome to Westchester Co-Op! Explore identity through interactive time capsules, school-themed sensory bins, and parachute movement games. Paint a creative self-portrait using natural loose parts.",
-    icon: "🎨",
+      "During our Community Helpers experience, children will learn by doing! They'll participate in engaging hands-on activities, pretend-play scenarios, movement games, and mini challenges that allow them to step into the roles of different community helpers. From rescuing and building to delivering, caring for, sorting, and solving problems, children will discover what these helpers do and why their jobs are important to our community.",
+    icon: "🧑‍🤝‍🧑",
     color: "primary",
-    funFact: "Loose Parts Play: Using everyday loose items (buttons, shells, twigs) helps children develop higher-level problem solving and abstract thinking!",
+    funFact: "Learning by Doing: Pretend-play builds empathy, problem-solving, and real-world awareness — all while having a blast!",
+    supplies: ["1 water spray bottle"],
   },
   {
     week: 2,
-    topic: "5 Senses",
-    activity: "Senses Exploration, Scavenger Hunt & Sensory Jars",
+    date: "October 8th",
+    topic: "Fire Day",
+    activity: "PE at Tropical Park & Fire Station Tour",
     description:
-      "We learn with our whole bodies! Students will participate in a guided multi-sensory exploration, hunt for clues outdoors on a scavenger hunt, and craft custom Sensory Jars to take home.",
-    icon: "👁️",
+      "Meet at Tropical Park! We'll start the day with PE at the park from 11:00 AM, then leave together for the fire station tour at 11:45 AM. Kids will meet real firefighter heroes, learn fire safety, and explore a real fire truck up close!",
+    icon: "👨‍🚒",
     color: "accent",
-    funFact: "Fun Fact: Did you know sensory jars can help calm and soothe the nervous system? They're wonderful practical tools!",
+    funFact: "Field Trip Alert: Meet at Tropical Park (PE at 11am) — we leave for the fire station promptly at 11:45 AM!",
+    supplies: ["Comfortable sneakers for PE", "Water bottle and sunscreen"],
   },
   {
     week: 3,
-    topic: "My Body",
-    activity: "Trace Me & My Lungs (Music & Movement)",
+    date: "October 15th",
+    topic: "Doctors Day",
+    activity: "Patient Care Pretend-Play",
     description:
-      "See how big we are! Children will trace each other's full bodies on butcher paper and build a working diagram model of the lungs to explore respiration. Active music and movement games keep us laughing and exercising.",
-    icon: "🫁",
+      "Today, children will step into the role of a doctor and learn through hands-on pretend play and problem-solving. Each child will receive a patient — a Barbie, doll, or stuffed animal — along with a patient chart. They'll observe their patient, figure out what might be wrong, and decide how they can help care for them. This activity encourages children to practice observation, communication, critical thinking, empathy, decision-making, and sequencing while developing an understanding of how doctors care for and help others.",
+    icon: "🩺",
     color: "secondary",
-    funFact: "Lung Power: Your left lung is slightly smaller than your right lung to make room for your heart!",
+    funFact: "Skill Building: Observation, communication, critical thinking, empathy, decision-making, and sequencing — all through caring play!",
+    supplies: ["A pencil or marker", "A clipboard"],
   },
   {
     week: 4,
-    topic: "Germs & Nutrition",
-    activity: "Germ Experiment & Fruit Sticks PLS",
+    date: "October 29th",
+    topic: "Farmers Market Day",
+    activity: "Create Your Own Market Stand",
     description:
-      "Discover the power of clean hands with a magical pepper-and-soap germ experiment! For Practical Life Skills (PLS), children wash, slice, and thread colorful fruits of choice onto fruit sticks. Includes Mindful PE.",
-    icon: "🦠",
+      "Children will create their own farmers market stand! You can partner with one other friend or do it alone. You must MAKE it yourself — it can be a baked good (no peanuts), a craft (like bracelets or necklaces), a made homegood item (candles, body butter, soap), or something special: an art piece, fresh lemonade, fruit cups... the possibilities are endless!",
+    icon: "🧺",
     color: "success",
-    funFact: "Fruit Rainbow: Squeezing, washing, and slicing fruits is a great Montessori practical life skill that strengthens fine motor control and independence!",
+    funFact: "Entrepreneur Day: Partner up or fly solo — make your product, set your stand, and sell to your co-op community!",
+    supplies: ["Your handmade product(s) to sell", "Any stand/table decorations you'd like"],
   },
 ]
 
@@ -158,6 +166,16 @@ const KENDALL_MONTH_AT_A_GLANCE = [
   { week: "Week 4", focus: "Farm Day" },
 ]
 
+const WESTCHESTER_FIELD_TRIPS = [
+  { icon: "🚒", name: "Fire Station", date: "Oct 8 at 12:00 PM — 3911 SW 82nd Ave, Miami, FL 33155" },
+  { icon: "🌱", name: "Sprout", date: "Oct 14 at 12:00 PM — in Kendall" },
+  { icon: "🏡", name: "Grounded Farm", date: "Oct 16 at 11:30 AM — $25 per child (parents & siblings free)" },
+]
+
+const WESTCHESTER_SPECIAL_EVENTS = [
+  { icon: "🐴", name: "Equestrian Day at Gacavi", date: "Oct 27 — $25 per child (Step Up funds may be used with FLEX)" },
+]
+
 interface UnitStudyViewProps {
   location?: "kendall" | "westchester"
 }
@@ -177,14 +195,14 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
       {/* Unit header */}
       <div className={`rounded-2xl bg-gradient-to-r ${headerGradient} border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-4`}>
         <div className="text-5xl" role="img" aria-label="unit-icon">
-          {isKendall ? "🍂" : "🎨"}
+          {isKendall ? "🍂" : "🚀"}
         </div>
         <div>
           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">
             {isKendall ? "Kendall Leadership Co Op" : "Westchester Co Op"}
           </div>
           <h2 className={`text-2xl font-black ${titleColor}`}>
-            {isKendall ? "October — Welcome to Fall!" : "All About Me & My Body"}
+            {isKendall ? "October — Welcome to Fall!" : "October — Community Helpers"}
           </h2>
           {isKendall && (
             <div className="inline-flex items-center gap-1.5 bg-primary/10 border border-primary/25 rounded-full px-2.5 py-0.5 text-xs font-black text-primary mt-1.5">
@@ -194,7 +212,7 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
           <p className="text-sm text-muted-foreground font-semibold mt-1.5">
             {isKendall
               ? "4-week hands-on October journey exploring perception, California geography, entrepreneurship & electrical currents — ending with a Farm Day enrichment!"
-              : "4-week multi-sensory adventure exploring self-identity, the 5 senses, skeletal/lung systems, germs, and practical life skills!"}
+              : "4-week October journey stepping into the roles of our community helpers — firefighters, doctors, and young entrepreneurs at our very own Farmers Market!"}
           </p>
         </div>
         <div className="sm:ml-auto flex flex-col items-start sm:items-end gap-1">
@@ -296,8 +314,50 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
         })}
       </div>
 
-      {/* Bottom Box: Month at a glance (Kendall) / Supplies reminder (Westchester) */}
-      {isKendall ? (
+      {/* Field Trips & Special Events (Westchester only) */}
+      {!isKendall && (
+        <div className="space-y-4">
+          <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5 space-y-3">
+            <div className="flex gap-3 items-center">
+              <span className="text-3xl">🚌</span>
+              <h4 className="font-black text-base text-accent">Field Trips</h4>
+            </div>
+            <div className="space-y-2">
+              {WESTCHESTER_FIELD_TRIPS.map((trip) => (
+                <div key={trip.name} className="bg-card border border-border rounded-xl p-3 flex items-start gap-2.5">
+                  <span className="text-xl">{trip.icon}</span>
+                  <div>
+                    <div className="text-xs font-black text-foreground">{trip.name}</div>
+                    <div className="text-xs text-muted-foreground font-semibold">{trip.date}</div>
+                  </div>
+                </div>
+              ))}
+              <p className="text-[11px] text-muted-foreground font-bold pt-1">
+                💳 Step Up funds may be used with FLEX.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border-2 border-secondary/30 bg-secondary/5 p-5 space-y-3">
+            <div className="flex gap-3 items-center">
+              <span className="text-3xl">🌟</span>
+              <h4 className="font-black text-base text-secondary">Special Events</h4>
+            </div>
+            {WESTCHESTER_SPECIAL_EVENTS.map((ev) => (
+              <div key={ev.name} className="bg-card border border-border rounded-xl p-3 flex items-start gap-2.5">
+                <span className="text-xl">{ev.icon}</span>
+                <div>
+                  <div className="text-xs font-black text-foreground">{ev.name}</div>
+                  <div className="text-xs text-muted-foreground font-semibold">{ev.date}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Box: Month at a glance (Kendall) / none needed (Westchester) */}
+      {isKendall && (
         <div className="rounded-2xl border-2 border-secondary/30 bg-secondary/5 p-5 space-y-4">
           <div className="flex gap-3 items-center">
             <span className="text-3xl">🗓️</span>
@@ -315,38 +375,6 @@ export function UnitStudyView({ location = "kendall" }: UnitStudyViewProps) {
                 <p className="text-muted-foreground font-semibold">{m.focus}</p>
               </div>
             ))}
-          </div>
-        </div>
-      ) : (
-        <div className="rounded-2xl bg-muted border border-border p-5 space-y-4">
-          <div className="flex gap-3 items-center">
-            <span className="text-3xl">🎒</span>
-            <div>
-              <h4 className="font-black text-base text-foreground">Supplies Needed for the Month</h4>
-              <p className="text-xs text-muted-foreground font-bold mt-0.5">
-                ⚠️ Note: Coordinate weekly supplies for Westchester group!
-              </p>
-            </div>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 text-xs">
-            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-              <span className="font-black text-indigo-500">Week 1 Supplies:</span>
-              <p className="text-muted-foreground font-semibold">Supply Box</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-              <span className="font-black text-accent">Week 2 Supplies:</span>
-              <p className="text-muted-foreground font-semibold">Super glue (for parent use only)</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-              <span className="font-black text-secondary">Week 3 Supplies:</span>
-              <p className="text-muted-foreground font-semibold">Supply Box and 8 by 10 piece of cardboard</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-3 space-y-1">
-              <span className="font-black text-success">Week 4 Supplies:</span>
-              <p className="text-muted-foreground font-semibold">
-                Bring one fruit of choice. 💬 Please communicate in the WhatsApp group chat to ensure no one brings duplicates!
-              </p>
-            </div>
           </div>
         </div>
       )}
